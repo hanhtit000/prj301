@@ -6,7 +6,7 @@ package model;
 
 public class Course {
     private int courseId;
-    private int courseName;
+    private String courseName;
 
     public int getCourseId() {
         return courseId;
@@ -16,11 +16,11 @@ public class Course {
         this.courseId = courseId;
     }
 
-    public int getCourseName() {
+    public String getCourseName() {
         return courseName;
     }
 
-    public void setCourseName(int courseName) {
+    public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
 

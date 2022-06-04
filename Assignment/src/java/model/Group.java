@@ -5,12 +5,10 @@
 package model;
 
 public class Group {
-    private int groupId;
-    private int groupName;
-    private int courseId;
-    private int instructorId;
-    private int studentId;
 
+    private int groupId;
+    private String groupName;
+    private Course courseId;
     public int getGroupId() {
         return groupId;
     }
@@ -19,37 +17,21 @@ public class Group {
         this.groupId = groupId;
     }
 
-    public int getGroupName() {
+    public String getGroupName() {
         return groupName;
     }
 
-    public void setGroupName(int groupName) {
+    public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
 
-    public int getCourseId() {
+    public Course getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(int courseId) {
+    public void setCourseId(Course courseId) {
         this.courseId = courseId;
     }
 
-    public int getInstructorId() {
-        return instructorId;
-    }
 
-    public void setInstructorId(int instructorId) {
-        this.instructorId = instructorId;
-    }
-
-    public int getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
-    }
-
-    
 }

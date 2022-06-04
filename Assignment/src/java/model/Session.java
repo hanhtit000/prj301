@@ -5,11 +5,12 @@
 package model;
 
 public class Session {
+
     private int sessionId;
-    private int groupId;
+    private Group groupId;
     private int instructorId;
     private int slot;
-    private int roomName;
+    private String roomName;
 
     public int getSessionId() {
         return sessionId;
@@ -19,11 +20,11 @@ public class Session {
         this.sessionId = sessionId;
     }
 
-    public int getGroupId() {
+    public Group getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(Group groupId) {
         this.groupId = groupId;
     }
 
@@ -43,13 +44,12 @@ public class Session {
         this.slot = slot;
     }
 
-    public int getRoomName() {
+    public String getRoomName() {
         return roomName;
     }
 
-    public void setRoomName(int roomName) {
+    public void setRoomName(String roomName) {
         this.roomName = roomName;
     }
 
-    
 }

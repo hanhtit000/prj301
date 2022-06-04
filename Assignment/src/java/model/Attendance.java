@@ -4,12 +4,14 @@
  */
 package model;
 
-public class Studying {
+import java.sql.Date;
+
+public class Attendance {
     private int sessionId;
     private int studentId;
-    private int attendanceStatus;
-    private int recordTime;
-    private int message;
+    private String attendanceStatus;
+    private Date recordTime;
+    private String message;
 
     public int getSessionId() {
         return sessionId;
@@ -27,28 +29,30 @@ public class Studying {
         this.studentId = studentId;
     }
 
-    public int getAttendanceStatus() {
+    public String getAttendanceStatus() {
         return attendanceStatus;
     }
 
-    public void setAttendanceStatus(int attendanceStatus) {
+    public void setAttendanceStatus(String attendanceStatus) {
         this.attendanceStatus = attendanceStatus;
     }
 
-    public int getRecordTime() {
+    public Date getRecordTime() {
         return recordTime;
     }
 
-    public void setRecordTime(int recordTime) {
+    public void setRecordTime(Date recordTime) {
         this.recordTime = recordTime;
     }
 
-    public int getMessage() {
+    public String getMessage() {
         return message;
     }
 
-    public void setMessage(int message) {
+    public void setMessage(String message) {
         this.message = message;
     }
+
+    
     
 }

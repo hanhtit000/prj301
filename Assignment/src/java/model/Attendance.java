@@ -8,7 +8,7 @@ import java.sql.Date;
 
 public class Attendance {
     private int sessionId;
-    private int studentId;
+    private Student studentId;
     private String attendanceStatus;
     private Date recordTime;
     private String message;
@@ -21,11 +21,11 @@ public class Attendance {
         this.sessionId = sessionId;
     }
 
-    public int getStudentId() {
+    public Student getStudentId() {
         return studentId;
     }
 
-    public void setStudentId(int studentId) {
+    public void setStudentId(Student studentId) {
         this.studentId = studentId;
     }
 

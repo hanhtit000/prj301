@@ -6,17 +6,10 @@ package model;
 
 public class Student {
     private int studentId;
+    private String studentCode;
     private String surName;
     private String midName;
     private String givenName;
-
-    public int getInstructorId() {
-        return studentId;
-    }
-
-    public void setInstructorId(int instructorId) {
-        this.studentId = instructorId;
-    }
 
     public int getStudentId() {
         return studentId;
@@ -24,6 +17,14 @@ public class Student {
 
     public void setStudentId(int studentId) {
         this.studentId = studentId;
+    }
+
+    public String getStudentCode() {
+        return studentCode;
+    }
+
+    public void setStudentCode(String studentCode) {
+        this.studentCode = studentCode;
     }
 
     public String getSurName() {
@@ -49,6 +50,9 @@ public class Student {
     public void setGivenName(String givenName) {
         this.givenName = givenName;
     }
+
+
+
 
     
 }

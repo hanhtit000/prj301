@@ -43,10 +43,7 @@ public class AccountDBContext extends DBContext<Account> {
     
     
 
-    @Override
-    public Account get(Account entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
 
     @Override
     public void insert(Account entity) {
@@ -65,6 +62,11 @@ public class AccountDBContext extends DBContext<Account> {
 
     @Override
     public ArrayList<Account> list() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ArrayList<Account> get(int x) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

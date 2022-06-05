@@ -50,7 +50,11 @@
                                     <td>${s.groupId.courseId.courseName}</td>
                                     <td>${s.slot}</td>
                                     <td>${s.roomName}</td>
-                                    <td><a href="">take</a>
+                                    <td>
+                                        <form action="TakeAttendance" method="post">
+                                            <button type="submit" name="takeattend" value="${s.sessionId}"  class="btn-link">Take</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>

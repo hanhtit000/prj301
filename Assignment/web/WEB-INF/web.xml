@@ -4,9 +4,17 @@
         <servlet-name>Schedule</servlet-name>
         <servlet-class>controller.Schedule</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TakeAttendance</servlet-name>
+        <servlet-class>controller.TakeAttendance</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Schedule</servlet-name>
         <url-pattern>/Schedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TakeAttendance</servlet-name>
+        <url-pattern>/TakeAttendance</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

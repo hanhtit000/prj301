@@ -23,9 +23,9 @@ public class ScheduleDBContext extends DBContext<Session> {
         ArrayList<Session> table = new ArrayList<>();
         try {
             String sql = "with t as (SELECT s.SessionID, s.GroupID, g.GroupName, g.CourseID, s.InstructorID, s.Slot, s.RoomName, s.DateFrom, s.DateTo \n"
-                    + "FROM [Assignment].[dbo].[Session] s, [Assignment].[dbo].[Group] g\n"
+                    + "FROM [dbo].[Session] s, [dbo].[Group] g\n"
                     + "where s.GroupId=g.GroupId)\n"
-                    + "select * from t, [Assignment].[dbo].[Course] as c\n"
+                    + "select * from t, [dbo].[Course] as c\n"
                     + "where t.CourseID=c.CourseID";
 //                    + "and t.DateFrom <= ? and t.DateTo >= ?";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -61,17 +61,6 @@ public class ScheduleDBContext extends DBContext<Session> {
         return table;
     }
 
-
-    @Override
-    public void insert(Session entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void update(Session entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     @Override
     public void delete(Session entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -79,6 +68,16 @@ public class ScheduleDBContext extends DBContext<Session> {
 
     @Override
     public ArrayList<Session> get(int x) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void insert(ArrayList<Session> entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update(ArrayList<Session> entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

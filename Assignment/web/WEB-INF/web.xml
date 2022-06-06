@@ -5,12 +5,20 @@
         <servlet-class>controller.Schedule</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ListAttendance</servlet-name>
+        <servlet-class>controller.ListAttendance</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>TakeAttendance</servlet-name>
         <servlet-class>controller.TakeAttendance</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Schedule</servlet-name>
         <url-pattern>/Schedule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListAttendance</servlet-name>
+        <url-pattern>/ListAttendance</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>TakeAttendance</servlet-name>

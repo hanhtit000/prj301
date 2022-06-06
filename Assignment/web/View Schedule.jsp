@@ -51,7 +51,7 @@
                                     <td>${s.slot}</td>
                                     <td>${s.roomName}</td>
                                     <td>
-                                        <form action="TakeAttendance" method="post">
+                                        <form action="ListAttendance" method="post">
                                             <button type="submit" name="takeattend" value="${s.sessionId}"  class="btn-link">Take</button>
                                         </form>
                                     </td>

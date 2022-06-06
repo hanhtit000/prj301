@@ -14,7 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="action" method="post" name="takeattend">
+        <form action="TakeAttendance" method="post">
             <h1>Take Attendance</h1>
             <table>
                 <thead>
@@ -29,19 +29,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:if test="${requestScope.liststudent ne null}"><p>ngu</p></c:if>
-                    <c:forEach items="${requestScope.liststudent}" var="stu">
-                        <tr>
-                            <td>${stu.studentId}</td>
-                            <td>${stu.studentCode}</td>
-                            <td>${stu.surName}</td>
-                            <td>${stu.midName}</td>
-                            <td>${stu.givenName}</td>
-                            <td><input type="text" name="mess"/></td>
-                            <td><input type="checkbox" name="cbox"/></td>
-                        </tr>
-                    </c:forEach>
-            </tbody>
+                <input type="hidden" value="${requestScope.sid}" name="sid" />
+                <% int i=1;%>
+                <c:forEach items="${requestScope.liststudent}" var="stu">
+                    <tr>
+                        <td><input type="hidden" value="${stu.studentId}" name="id<%=i%>" />${stu.studentId}</td>
+                        <td><input type="hidden" value="${stu.studentCode}" name="code<%=i%>" />${stu.studentCode}</td>
+                        <td><input type="hidden" value="${stu.surName}" name="sur<%=i%>" />${stu.surName}</td>
+                        <td><input type="hidden" value="${stu.midName}" name="mid<%=i%>" />${stu.midName}</td>
+                        <td><input type="hidden" value="${stu.givenName}" name="given<%=i%>" />${stu.givenName}</td>
+                        <td><input type="text" value="" name="mess<%=i%>"/></td>
+                        <td>
+                            <input type="radio" checked="checked" name="cbox<%=i%>" value="Absent"/>Absent  <input type="radio" name="cbox<%=i%>" value="Attended"/> Attended
+                        </td>
+                        <%i++;%>
+                    </tr>
+                </c:forEach>
+                <input type="hidden" value="<%=i%>" name="count" />
+                </tbody>
             </table>
             <input type="submit" name="Send"/>
         </form>

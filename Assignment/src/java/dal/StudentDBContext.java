@@ -21,10 +21,10 @@ public class StudentDBContext extends DBContext<Student> {
         ArrayList<Student> table = new ArrayList<>();
         try {
             String sql = "With t as(SELECT s.SessionID, g.GroupID\n" +
-            "FROM [Assignment].[dbo].[Group] as g, [Assignment].[dbo].[Session] as s\n" +
+            "FROM [dbo].[Group] as g, [dbo].[Session] as s\n" +
             "where s.GroupID=g.GroupID and s.SessionID=?)\n" +
-            "Select distinct stu.StudentID, stu.StudentCode, stu.SurName, stu.MidName, stu.GivenName\n" +
-            "from [Assignment].[dbo].[Student] as stu, [Assignment].[dbo].[Enroll] as e, t\n" +
+            "Select distinct t.SessionID, stu.StudentID, stu.StudentCode, stu.SurName, stu.MidName, stu.GivenName\n" +
+            "from [dbo].[Student] as stu, [dbo].[Enroll] as e, t\n" +
             "where stu.StudentID=e.StudentID and t.GroupID=e.GroupID\n" +
             "order by stu.StudentID asc";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -54,18 +54,6 @@ public class StudentDBContext extends DBContext<Student> {
         return table;
     }
 
-
-
-    @Override
-    public void insert(Student entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void update(Student entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
     @Override
     public void delete(Student entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -73,6 +61,16 @@ public class StudentDBContext extends DBContext<Student> {
 
     @Override
     public ArrayList<Student> list() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void insert(ArrayList<Student> entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update(ArrayList<Student> entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

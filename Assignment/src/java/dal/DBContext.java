@@ -31,8 +31,8 @@ public abstract class DBContext<T> {
     
     public abstract ArrayList<T> list();
     public abstract ArrayList<T> get(int x);
-    public abstract void insert(T entity);
-    public abstract void update(T entity);
+    public abstract void insert(ArrayList<T> entity);
+    public abstract void update(ArrayList<T> entity);
     public abstract void delete(T entity);
     
 }

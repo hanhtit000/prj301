@@ -12,7 +12,7 @@
                 document.getElementById('timer').innerHTML = count;
                 if(count <= 0)
                 {
-                    window.location.href = 'search';
+                    window.location.href = 'Schedule';
                 }
             }
             setInterval(redirect,1000);
@@ -21,5 +21,6 @@
     <body>
         <!--${requestScope.action}-->
         Attendance has been taken to DB <br/>
+        Redirect to Schedule page after <span id="timer">3</span> seconds!
     </body>
 </html>

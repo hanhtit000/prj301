@@ -14,7 +14,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="TakeAttendance" method="post">
+        <form action="ChangeAttendance" method="post">
             <h1>Update Attendance</h1>
             <table>
                 <thead>

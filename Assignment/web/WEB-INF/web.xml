@@ -10,7 +10,11 @@
     </servlet>
     <servlet>
         <servlet-name>TakeAttendance</servlet-name>
-        <servlet-class>controller.TakeAttendance</servlet-class>
+        <servlet-class>controller.AddAttendanceToDB</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangeAttendanceFromDB</servlet-name>
+        <servlet-class>controller.ChangeAttendanceFromDB</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Schedule</servlet-name>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>TakeAttendance</servlet-name>
         <url-pattern>/TakeAttendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangeAttendanceFromDB</servlet-name>
+        <url-pattern>/ChangeAttendance</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -30,8 +30,9 @@ public class UpdateDBContext extends DBContext<Attendance> {
         try {
             String sql = "SELECT a.StudentID, a.SessionID, a.AttendanceStatus, a.RecordTime, a.Message, s.StudentCode, s.SurName, s.MidName, s.GivenName\n"
                     + "FROM [dbo].[Attendance] as a, [dbo].[Student] as s\n"
-                    + "where s.StudentID=a.StudentID";
+                    + "where s.StudentID=a.StudentID and a.SessionID=?";
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, x);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Attendance r = new Attendance();
@@ -72,7 +73,29 @@ public class UpdateDBContext extends DBContext<Attendance> {
 
     @Override
     public void update(ArrayList<Attendance> entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            for (int i = 0; i < entity.size(); i++) {
+                String sql = "UPDATE [dbo].[Attendance]\n"
+                        + "   SET AttendanceStatus = ?\n"
+                        + "      ,RecordTime = ?\n"
+                        + "      ,Message = ?\n"
+                        + " WHERE StudentID=? and SessionID=?";
+                PreparedStatement stm = connection.prepareStatement(sql);
+                stm.setString(1, entity.get(i).getAttendanceStatus());
+                stm.setDate(2, entity.get(i).getRecordTime());
+                stm.setString(3, entity.get(i).getMessage());
+                stm.setInt(4, entity.get(i).getStudentId().getStudentId());
+                stm.setInt(5, entity.get(i).getSessionId());
+                stm.executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(StudentDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-
 }

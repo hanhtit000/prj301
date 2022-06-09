@@ -16,6 +16,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 import model.Session;
@@ -28,6 +30,8 @@ public class Schedule extends HttpServlet {
         DBContext<Session> sch = new ScheduleDBContext();
         ArrayList<Session> list = sch.list();
         request.setAttribute("scheduleList", list);
+        Date d= Date.valueOf(LocalDate.MAX);
+        request.setAttribute("date", list);
         request.getRequestDispatcher("View Schedule.jsp").forward(request, response);
     }
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>Schedule</servlet-name>
-        <servlet-class>controller.Schedule</servlet-class>
+        <servlet-name>Detail</servlet-name>
+        <servlet-class>controller.Detail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ListAttendance</servlet-name>
@@ -16,9 +16,13 @@
         <servlet-name>ChangeAttendanceFromDB</servlet-name>
         <servlet-class>controller.ChangeAttendanceFromDB</servlet-class>
     </servlet>
-    <servlet-mapping>
+    <servlet>
         <servlet-name>Schedule</servlet-name>
-        <url-pattern>/Schedule</url-pattern>
+        <servlet-class>controller.Schedule</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Detail</servlet-name>
+        <url-pattern>/Detail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListAttendance</servlet-name>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ChangeAttendanceFromDB</servlet-name>
         <url-pattern>/ChangeAttendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Schedule</servlet-name>
+        <url-pattern>/Schedule</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

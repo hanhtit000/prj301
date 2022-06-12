@@ -17,19 +17,30 @@ import model.Group;
 import model.Instructor;
 import model.Session;
 
-public class ScheduleDBContext extends DBContext<Session> {
+public class DetailDBcontext extends DBContext<Session> {
 
     @Override
     public ArrayList<Session> list() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void delete(Session entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ArrayList<Session> get(int x) {
         ArrayList<Session> table = new ArrayList<>();
         try {
-            String sql = "with t as (SELECT s.SessionID, s.GroupID, g.GroupName, g.CourseID, s.InstructorID, s.Slot, s.RoomName, s.Monday, s.Tuesday, s.Wednesday, s.Thursday, s.Friday, s.Saturday, s.Sunday,s.DateFrom, s.DateTo\n"
+            String sql = "with t as (SELECT s.SessionID, s.GroupID, g.GroupName, g.CourseID, s.InstructorID, s.Slot, s.RoomName\n"
                     + "FROM [dbo].[Session] s, [dbo].[Group] g\n"
                     + "where s.GroupId=g.GroupId)\n"
-                    + "select * from t, [dbo].[Course] as c\n"
-                    + "where t.CourseID=c.CourseID";
+                    + "select * from t, [dbo].[Course] as c, [dbo].[Instructor] as i\n"
+                    + "where t.CourseID=c.CourseID and t.InstructorID=i.InstructorID and t.SessionID =?";
 //                    + "and t.DateFrom <= ? and t.DateTo >= ?";
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, x);
 //            stm.setDate(1, Date.valueOf(LocalDate.now().toString()));
 //            stm.setDate(2, Date.valueOf(LocalDate.now().toString()));
             ResultSet rs = stm.executeQuery();
@@ -43,41 +54,27 @@ public class ScheduleDBContext extends DBContext<Session> {
                 c.setCourseId(rs.getInt("CourseID"));
                 c.setCourseName(rs.getString("CourseName"));
                 g.setCourseId(c);
-                Instructor i =new Instructor();
+                Instructor i = new Instructor();
                 i.setInstructorId(rs.getInt("InstructorID"));
+                i.setSurName(rs.getString("SurName"));
+                i.setMidName(rs.getString("MidName"));
+                i.setGivenName(rs.getString("GivenName"));
                 r.setInstructorId(i);
                 r.setSlot(rs.getInt("Slot"));
                 r.setRoomName(rs.getString("RoomName"));
                 r.setGroupId(g);
-                r.setMonday(rs.getString("Monday"));
-                r.setTuesday(rs.getString("Tuesday"));
-                r.setWednesday(rs.getString("Wednesday"));
-                r.setThursday(rs.getString("Thursday"));
-                r.setFriday(rs.getString("Friday"));
-                r.setSaturday(rs.getString("Saturday"));
-                r.setSunday(rs.getString("Sunday"));
                 table.add(r);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(ScheduleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DetailDBcontext.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                Logger.getLogger(ScheduleDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(DetailDBcontext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         return table;
-    }
-
-    @Override
-    public void delete(Session entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public ArrayList<Session> get(int x) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override

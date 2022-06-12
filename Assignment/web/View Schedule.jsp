@@ -34,30 +34,84 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Session</th>
-                                <th>Group Name</th>
-                                <th>Course Name</th>
                                 <th>Slot</th>
-                                <th>Room Name</th>
-                                <th>Take Attendance</th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                                <th>Saturday</th>
+                                <th>Sunday</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <%int i=0;%>
                             <c:forEach items="${requestScope.scheduleList}" var="s">
                                 <tr>
-                                    <td>${s.sessionId}</td>
-                                    <td>${s.groupId.groupName}</td>
-                                    <td>${s.groupId.courseId.courseName}</td>
-                                    <td>${s.slot}</td>
-                                    <td>${s.roomName}</td>
-                                    <td>
-                                        <form action="ListAttendance" method="post">
-                                            <button type="submit" name="takeattend" value="${s.sessionId}"  class="btn-link">Take</button>
-                                        </form>
-                                        <form action="EditAttendance" method="post">
-                                            <button type="submit" name="editattend" value="${s.sessionId}"  class="btn-link">Edit</button>
-                                        </form>
+                                    <td><%=i++%></td>
+                                    <c:if test="${s.monday.equals('1')}">
+                                    <td>${s.groupId.courseId.courseName}
+                                        <br> at ${s.roomName}
+                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
                                     </td>
+                                    </c:if>
+                                    <c:if test="${s.monday.equals('0')}">
+                                    <td>-</td>
+                                    </c:if>
+                                    <c:if test="${s.tuesday.equals('1')}">
+                                    <td>${s.groupId.courseId.courseName}
+                                        <br> at ${s.roomName}
+                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
+                                    </td>
+                                    </c:if>
+                                    <c:if test="${s.tuesday.equals('0')}">
+                                    <td>-</td>
+                                    </c:if>
+                                    <c:if test="${s.wednesday.equals('1')}">
+                                    <td>${s.groupId.courseId.courseName}
+                                        <br> at ${s.roomName}
+                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
+                                    </td>
+                                    </c:if>
+                                    <c:if test="${s.wednesday.equals('0')}">
+                                    <td>-</td>
+                                    </c:if>
+                                    <c:if test="${s.thursday.equals('1')}">
+                                    <td>${s.groupId.courseId.courseName}
+                                        <br> at ${s.roomName}
+                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
+                                    </td>
+                                    </c:if>
+                                    <c:if test="${s.thursday.equals('0')}">
+                                    <td>-</td>
+                                    </c:if>
+                                    <c:if test="${s.friday.equals('1')}">
+                                    <td>${s.groupId.courseId.courseName}
+                                        <br> at ${s.roomName}
+                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
+                                    </td>
+                                    </c:if>
+                                    <c:if test="${s.friday.equals('0')}">
+                                    <td>-</td>
+                                    </c:if>
+                                    <c:if test="${s.saturday.equals('1')}">
+                                    <td>${s.groupId.courseId.courseName}
+                                        <br> at ${s.roomName}
+                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
+                                    </td>
+                                    </c:if>
+                                    <c:if test="${s.saturday.equals('0')}">
+                                    <td>-</td>
+                                    </c:if>
+                                    <c:if test="${s.sunday.equals('1')}">
+                                    <td>${s.groupId.courseId.courseName}
+                                        <br> at ${s.roomName}
+                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
+                                    </td>
+                                    </c:if>
+                                    <c:if test="${s.sunday.equals('0')}">
+                                    <td>-</td>
+                                    </c:if>
                                 </tr>
                             </c:forEach>
                         </tbody>

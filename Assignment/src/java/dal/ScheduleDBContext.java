@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Course;
@@ -23,15 +24,23 @@ public class ScheduleDBContext extends DBContext<Session> {
     public ArrayList<Session> list() {
         ArrayList<Session> table = new ArrayList<>();
         try {
-            String sql = "with t as (SELECT s.SessionID, s.GroupID, g.GroupName, g.CourseID, s.InstructorID, s.Slot, s.RoomName, s.Monday, s.Tuesday, s.Wednesday, s.Thursday, s.Friday, s.Saturday, s.Sunday,s.DateFrom, s.DateTo\n"
+            String sql = "with t as (SELECT s.SessionID, s.GroupID, g.GroupName, g.CourseID, s.InstructorID, s.Slot, s.RoomName, s.Date\n"
                     + "FROM [dbo].[Session] s, [dbo].[Group] g\n"
                     + "where s.GroupId=g.GroupId)\n"
                     + "select * from t, [dbo].[Course] as c\n"
-                    + "where t.CourseID=c.CourseID";
-//                    + "and t.DateFrom <= ? and t.DateTo >= ?";
+                    + "where t.CourseID=c.CourseID\n"
+                    + "and t.Date >= ? and t.Date <= ?";
+            Calendar ist= Calendar.getInstance();
+            int y =ist.get(Calendar.YEAR);
+            int d = ist.get(Calendar.DAY_OF_YEAR);
+            int d1 = ist.get(Calendar.DAY_OF_WEEK);
+            Date from = Date.valueOf(LocalDate.ofYearDay(y, d-d1+1));
+            Date to = Date.valueOf(LocalDate.ofYearDay(y, d-d1+7));
             PreparedStatement stm = connection.prepareStatement(sql);
-//            stm.setDate(1, Date.valueOf(LocalDate.now().toString()));
-//            stm.setDate(2, Date.valueOf(LocalDate.now().toString()));
+            stm.setDate(1, from);
+            stm.setDate(2, to);
+//            stm.setInt(1, 10);
+//            stm.setInt(2, 20);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Session r = new Session();
@@ -43,19 +52,13 @@ public class ScheduleDBContext extends DBContext<Session> {
                 c.setCourseId(rs.getInt("CourseID"));
                 c.setCourseName(rs.getString("CourseName"));
                 g.setCourseId(c);
-                Instructor i =new Instructor();
+                Instructor i = new Instructor();
                 i.setInstructorId(rs.getInt("InstructorID"));
                 r.setInstructorId(i);
                 r.setSlot(rs.getInt("Slot"));
                 r.setRoomName(rs.getString("RoomName"));
                 r.setGroupId(g);
-                r.setMonday(rs.getString("Monday"));
-                r.setTuesday(rs.getString("Tuesday"));
-                r.setWednesday(rs.getString("Wednesday"));
-                r.setThursday(rs.getString("Thursday"));
-                r.setFriday(rs.getString("Friday"));
-                r.setSaturday(rs.getString("Saturday"));
-                r.setSunday(rs.getString("Sunday"));
+                r.setDate(rs.getDate("Date"));
                 table.add(r);
             }
         } catch (SQLException ex) {

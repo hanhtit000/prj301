@@ -1,7 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Calendar" %>
-<%@page import="java.util.Date" %>
+<%@page import="java.time.LocalDate" %>
+<%@page import="java.sql.Date" %>
 <!doctype html>
 <html lang="en">
     <head>
@@ -45,73 +46,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <%int i=0;%>
+                            <%
+                                int i=0;
+                                Calendar ist= Calendar.getInstance();
+                                int y =ist.get(Calendar.YEAR);
+                                int d = ist.get(Calendar.DAY_OF_YEAR);
+                                int d1 = ist.get(Calendar.DAY_OF_WEEK);
+                                ist.add(Calendar.DATE, 6);
+                            %>
                             <c:forEach items="${requestScope.scheduleList}" var="s">
                                 <tr>
                                     <td><%=i++%></td>
-                                    <c:if test="${s.monday.equals('1')}">
-                                    <td>${s.groupId.courseId.courseName}
-                                        <br> at ${s.roomName}
-                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
-                                    </td>
+                                    <%for(int j=d-d1+1;j<d-d1+8;j++){
+                                        Date day = Date.valueOf(LocalDate.ofYearDay(y, j));
+                                    %>
+                                    <c:if test="${s.slot == i and s.date.equals(day)}">
+                                        <td>${s.groupId.courseId.courseName}
+                                            <br> at ${s.roomName}
+                                            <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
+                                        </td>
                                     </c:if>
-                                    <c:if test="${s.monday.equals('0')}">
-                                    <td>-</td>
+                                    <c:if test="${s.slot != i or !s.date.equals(day)}">
+                                        <td>-</td>
                                     </c:if>
-                                    <c:if test="${s.tuesday.equals('1')}">
-                                    <td>${s.groupId.courseId.courseName}
-                                        <br> at ${s.roomName}
-                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
-                                    </td>
-                                    </c:if>
-                                    <c:if test="${s.tuesday.equals('0')}">
-                                    <td>-</td>
-                                    </c:if>
-                                    <c:if test="${s.wednesday.equals('1')}">
-                                    <td>${s.groupId.courseId.courseName}
-                                        <br> at ${s.roomName}
-                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
-                                    </td>
-                                    </c:if>
-                                    <c:if test="${s.wednesday.equals('0')}">
-                                    <td>-</td>
-                                    </c:if>
-                                    <c:if test="${s.thursday.equals('1')}">
-                                    <td>${s.groupId.courseId.courseName}
-                                        <br> at ${s.roomName}
-                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
-                                    </td>
-                                    </c:if>
-                                    <c:if test="${s.thursday.equals('0')}">
-                                    <td>-</td>
-                                    </c:if>
-                                    <c:if test="${s.friday.equals('1')}">
-                                    <td>${s.groupId.courseId.courseName}
-                                        <br> at ${s.roomName}
-                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
-                                    </td>
-                                    </c:if>
-                                    <c:if test="${s.friday.equals('0')}">
-                                    <td>-</td>
-                                    </c:if>
-                                    <c:if test="${s.saturday.equals('1')}">
-                                    <td>${s.groupId.courseId.courseName}
-                                        <br> at ${s.roomName}
-                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
-                                    </td>
-                                    </c:if>
-                                    <c:if test="${s.saturday.equals('0')}">
-                                    <td>-</td>
-                                    </c:if>
-                                    <c:if test="${s.sunday.equals('1')}">
-                                    <td>${s.groupId.courseId.courseName}
-                                        <br> at ${s.roomName}
-                                        <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
-                                    </td>
-                                    </c:if>
-                                    <c:if test="${s.sunday.equals('0')}">
-                                    <td>-</td>
-                                    </c:if>
+                                   <%}%>
                                 </tr>
                             </c:forEach>
                         </tbody>

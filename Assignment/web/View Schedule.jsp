@@ -1,80 +1,88 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Calendar" %>
+<%@page import="java.util.ArrayList" %>
 <%@page import="java.time.LocalDate" %>
 <%@page import="java.sql.Date" %>
+<%@page import="model.Session" %>
 <!doctype html>
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
+
         <title>
             View Schedule 
         </title>
     </head>
 
     <body>
+        <nav class="navbar" role="navigation">
+            <ul class="nav navbar-nav">
+                <li> <a href="Home">Home</a> </li>
+                <li> <a href="Schedule">View Schedule</a></li>
+            </ul>
+        </nav>
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    <h1><span>hạnh</span>
-                    </h1>
-                </div>
                 <div id="ctl00_divUser" style="float: right; margin-right: 16px;">
-                    <a href="https://fap.fpt.edu.vn/Report/ScheduleOfWeek.aspx?view=user">
-                        <span id="ctl00_lblLogIn" class="label label-success">hanhndhe163004</span></a> | <a href="https://fap.fpt.edu.vn/Report/ScheduleOfWeek.aspx?logout=true" class="label label-success">logout</a> |
                     <span id="ctl00_lblCampusName" class="label label-success"> CAMPUS: FPTU-Hòa Lạc</span>
-                </div>
-                <ol class="breadcrumb">
-                    <li>
-                        <span id="ctl00_lblNavigation"><a href="https://fap.fpt.edu.vn/Student.aspx">Home</a>&nbsp;|&nbsp;<b>View Schedule</b></span></li>
-                </ol>
-                <c:if test="${requestScope.scheduleList ne null}">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Slot</th>
-                                <th>Monday</th>
-                                <th>Tuesday</th>
-                                <th>Wednesday</th>
-                                <th>Thursday</th>
-                                <th>Friday</th>
-                                <th>Saturday</th>
-                                <th>Sunday</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%
-                                int i=0;
-                                Calendar ist= Calendar.getInstance();
-                                int y =ist.get(Calendar.YEAR);
-                                int d = ist.get(Calendar.DAY_OF_YEAR);
-                                int d1 = ist.get(Calendar.DAY_OF_WEEK);
-                                ist.add(Calendar.DATE, 6);
-                            %>
-                            <c:forEach items="${requestScope.scheduleList}" var="s">
-                                <tr>
-                                    <td><%=i++%></td>
-                                    <%for(int j=d-d1+1;j<d-d1+8;j++){
-                                        Date day = Date.valueOf(LocalDate.ofYearDay(y, j));
-                                    %>
-                                    <c:if test="${s.slot == i and s.date.equals(day)}">
-                                        <td>${s.groupId.courseId.courseName}
-                                            <br> at ${s.roomName}
-                                            <br><a href="Detail?sessionId=${s.sessionId}">Detail</a>
-                                        </td>
-                                    </c:if>
-                                    <c:if test="${s.slot != i or !s.date.equals(day)}">
-                                        <td>-</td>
-                                    </c:if>
-                                   <%}%>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
-                </c:if>
+                </div>    
             </div>
+        </div>
+        <div class="row" style="padding-top: 20px">
+            <p style="font-size: 50px"> 
+                Activities for you in this week
+            </p>
+        </div>
+        <div class="Schedule_table">
+            <c:if test="${requestScope.scheduleList ne null}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Slot</th>
+                            <th>Sunday</th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                            <th>Saturday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            ArrayList<Session> s = (ArrayList<Session>) request.getAttribute("scheduleList");
+                            int i=0;
+                            Calendar ist= Calendar.getInstance();
+                            int y =ist.get(Calendar.YEAR);
+                            int d = ist.get(Calendar.DAY_OF_YEAR);
+                            int d1 = ist.get(Calendar.DAY_OF_WEEK);
+                            for(i=1;i<=10;i++){
+                        %>
+                        <tr>
+                            <td><%=i%></td>
+                            <%
+                                for(int j=d-d1+1;j<d-d1+8;j++){
+                                    int kt=0;
+                                    Date date = Date.valueOf(LocalDate.ofYearDay(y, j));
+                                    for(Session c: s){
+                                        if(c.getSlot()==i && c.getDate().equals(date)){
+                                        kt=1;
+                            %>
+                            <td><%=c.getGroupId().getCourseId().getCourseName()%>
+                                <br> at <%=c.getRoomName()%>
+                                <br><a href="Detail?sessionId=<%=c.getSessionId()%>">Detail</a>
+                            </td>
+                            <%}}
+                            if(kt!=1){%>                      
+                            <td>-</td>
+                            <%}}%>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+            </c:if>
         </div>
     </body>

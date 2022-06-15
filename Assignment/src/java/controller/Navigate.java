@@ -5,24 +5,18 @@
 
 package controller;
 
-import dal.DBContext;
-import dal.ScheduleDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import model.Session;
 
 /**
  *
  * @author ASUS
  */
-public class Schedule extends HttpServlet {
+public class Navigate extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +27,19 @@ public class Schedule extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        DBContext<Session> sch = new ScheduleDBContext();
-        ArrayList<Session> list = sch.list();
-        request.setAttribute("scheduleList", list);
-        request.getRequestDispatcher("View Schedule.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Navigate</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet Navigate at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -50,7 +53,7 @@ public class Schedule extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("index.html").forward(request, response);
     } 
 
     /** 

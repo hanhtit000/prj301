@@ -11,9 +11,22 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Update Attendance</title>
     </head>
     <body>
+        <nav class="navbar" role="navigation">
+            <ul class="nav navbar-nav">
+                <li> <a href="Home">Home</a> </li>
+                <li> <a href="Schedule">View Schedule</a></li>
+            </ul>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div id="ctl00_divUser" style="float: right; margin-right: 16px;">
+                    <span id="ctl00_lblCampusName" class="label label-success"> CAMPUS: FPTU-Hòa Lạc</span>
+                </div>    
+            </div>
+        </div>
         <form action="ChangeAttendance" method="post">
             <h1>Update Attendance</h1>
             <table>

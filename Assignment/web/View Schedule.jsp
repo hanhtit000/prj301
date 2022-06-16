@@ -33,7 +33,7 @@
         </div>
         <div class="row" style="padding-top: 20px">
             <p style="font-size: 50px"> 
-                Activities for you in this week
+                Activities for you in this current week
             </p>
         </div>
         <div class="Schedule_table">
@@ -59,7 +59,20 @@
                             int y =ist.get(Calendar.YEAR);
                             int d = ist.get(Calendar.DAY_OF_YEAR);
                             int d1 = ist.get(Calendar.DAY_OF_WEEK);
-                            for(i=1;i<=10;i++){
+                        %>
+                        <tr>
+                            <td></td><!-- comment -->
+                            <%
+                        for(int j=d-d1+1;j<d-d1+8;j++){
+                            Date date1 = Date.valueOf(LocalDate.ofYearDay(y, j));
+                            %>
+                            <td><%=date1%></td>
+                            <%
+                        }
+                            %>
+                        </tr>
+                        <%
+                        for(i=1;i<=10;i++){
                         %>
                         <tr>
                             <td><%=i%></td>

@@ -11,7 +11,21 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="Stylesheet" href="css/bootstrap.css" type="text/css">
+        <link rel="Stylesheet" href="css/bootstrap.min.css" type="text/css">
+        <link rel="Stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
+        <link href="css/mystyle.css" rel="stylesheet">
+        <script src="css/jquery_002.js" type="text/javascript"></script>
 
+        <script src="css/jquery_003.js" type="text/javascript"></script>
+
+        <script src="css/jquery.js" type="text/javascript"></script>
+
+        <script src="css/jquery-1.8.3.js" type="text/javascript"></script>
+
+        <script src="css/jquery-ui.js" type="text/javascript"></script>
+
+        <script src="css/jquery.alerts.js" type="text/javascript"></script>
         <title>
             View Schedule 
         </title>
@@ -61,18 +75,18 @@
                             int d1 = ist.get(Calendar.DAY_OF_WEEK);
                         %>
                         <tr>
-                            <td></td><!-- comment -->
-                            <%
-                        for(int j=d-d1+1;j<d-d1+8;j++){
-                            Date date1 = Date.valueOf(LocalDate.ofYearDay(y, j));
-                            %>
-                            <td><%=date1%></td>
-                            <%
-                        }
-                            %>
+                            <th></th><!-- comment -->
+                                <%
+                            for(int j=d-d1+1;j<d-d1+8;j++){
+                                Date date1 = Date.valueOf(LocalDate.ofYearDay(y, j));
+                                %>
+                            <th><%=date1%></th>
+                                <%
+                            }
+                                %>
                         </tr>
                         <%
-                        for(i=1;i<=10;i++){
+                        for(i=1;i<=8;i++){
                         %>
                         <tr>
                             <td><%=i%></td>

@@ -1,6 +1,114 @@
 <!DOCTYPE html>
 <!-- saved from url=(0041)http://localhost:9999/Assignment/Schedule -->
 <html lang="en">
+  <script>
+    (function () {
+      class RuffleMimeType {
+        constructor(a, b, c) {
+          (this.type = a), (this.description = b), (this.suffixes = c);
+        }
+      }
+      class RuffleMimeTypeArray {
+        constructor(a) {
+          (this.__mimetypes = []), (this.__named_mimetypes = {});
+          for (let b of a) this.install(b);
+        }
+        install(a) {
+          let b = this.__mimetypes.length;
+          this.__mimetypes.push(a),
+            (this.__named_mimetypes[a.type] = a),
+            (this[a.type] = a),
+            (this[b] = a);
+        }
+        item(a) {
+          return this.__mimetypes[a];
+        }
+        namedItem(a) {
+          return this.__named_mimetypes[a];
+        }
+        get length() {
+          return this.__mimetypes.length;
+        }
+      }
+      class RufflePlugin extends RuffleMimeTypeArray {
+        constructor(a, b, c, d) {
+          super(d),
+            (this.name = a),
+            (this.description = b),
+            (this.filename = c);
+        }
+        install(a) {
+          a.enabledPlugin || (a.enabledPlugin = this), super.install(a);
+        }
+      }
+      class RufflePluginArray {
+        constructor(a) {
+          (this.__plugins = []), (this.__named_plugins = {});
+          for (let b of a) this.install(b);
+        }
+        install(a) {
+          let b = this.__plugins.length;
+          this.__plugins.push(a),
+            (this.__named_plugins[a.name] = a),
+            (this[a.name] = a),
+            (this[b] = a);
+        }
+        item(a) {
+          return this.__plugins[a];
+        }
+        namedItem(a) {
+          return this.__named_plugins[a];
+        }
+        get length() {
+          return this.__plugins.length;
+        }
+      }
+      const FLASH_PLUGIN = new RufflePlugin(
+        "Shockwave Flash",
+        "Shockwave Flash 32.0 r0",
+        "ruffle.js",
+        [
+          new RuffleMimeType(
+            "application/futuresplash",
+            "Shockwave Flash",
+            "spl"
+          ),
+          new RuffleMimeType(
+            "application/x-shockwave-flash",
+            "Shockwave Flash",
+            "swf"
+          ),
+          new RuffleMimeType(
+            "application/x-shockwave-flash2-preview",
+            "Shockwave Flash",
+            "swf"
+          ),
+          new RuffleMimeType(
+            "application/vnd.adobe.flash-movie",
+            "Shockwave Flash",
+            "swf"
+          ),
+        ]
+      );
+
+      function install_plugin(a) {
+        navigator.plugins.install ||
+          Object.defineProperty(navigator, "plugins", {
+            value: new RufflePluginArray(navigator.plugins),
+            writable: !1,
+          }),
+          navigator.plugins.install(a),
+          0 < a.length &&
+            !navigator.mimeTypes.install &&
+            Object.defineProperty(navigator, "mimeTypes", {
+              value: new RuffleMimeTypeArray(navigator.mimeTypes),
+              writable: !1,
+            });
+        for (var b = 0; b < a.length; b += 1) navigator.mimeTypes.install(a[b]);
+      }
+      install_plugin(FLASH_PLUGIN);
+    })();
+  </script>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
@@ -9,21 +117,41 @@
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
     />
-    <link rel="Stylesheet" href="./View Schedule1_files/bootstrap.css" type="text/css"><link rel="Stylesheet" href="./View Schedule1_files/bootstrap.min.css" type="text/css"><link rel="Stylesheet" href="./View Schedule1_files/bootstrap-theme.min.css" type="text/css">
-    <link href="css/mystyle.css" rel="stylesheet">
-    <script src="./View Schedule1_files/jquery_002.js.tải xuống" type="text/javascript"></script>
+    <link rel="Stylesheet" href="web/css/bootstrap.css" type="text/css" />
+    <link rel="Stylesheet" href="web/css/bootstrap.min.css" type="text/css" />
+    <link
+      rel="Stylesheet"
+      href="web/css/bootstrap-theme.min.css"
+      type="text/css"
+    />
+    <link href="web/css/mystyle.css" rel="stylesheet" />
+    <script
+      src="web/css/jquery_002.js.tải xuống"
+      type="text/javascript"
+    ></script>
 
-    <script src="./View Schedule1_files/jquery_003.js.tải xuống" type="text/javascript"></script>
+    <script
+      src="web/css/jquery_003.js.tải xuống"
+      type="text/javascript"
+    ></script>
 
-    <script src="./View Schedule1_files/jquery.js.tải xuống" type="text/javascript"></script>
+    <script src="web/css/jquery.js.tải xuống" type="text/javascript"></script>
 
-    <script src="./View Schedule1_files/jquery-1.8.3.js.tải xuống" type="text/javascript"></script>
+    <script
+      src="web/css/jquery-1.8.3.js.tải xuống"
+      type="text/javascript"
+    ></script>
 
-    <script src="./View Schedule1_files/jquery-ui.js.tải xuống" type="text/javascript"></script>
+    <script
+      src="web/css/jquery-ui.js.tải xuống"
+      type="text/javascript"
+    ></script>
 
-    <script src="./View Schedule1_files/jquery.alerts.js.tải xuống" type="text/javascript"></script>
+    <script
+      src="web/css/jquery.alerts.js.tải xuống"
+      type="text/javascript"
+    ></script>
     <title>View Schedule</title>
-    <style></style>
   </head>
 
   <body>
@@ -45,7 +173,9 @@
       </div>
     </div>
     <div class="row" style="padding-top: 20px">
-      <p class="head">Activities for you in this current week</p>
+      <p style="font-size: 40px; margin-left: 30px">
+        Activities for you in this current week
+      </p>
     </div>
     <div class="Schedule_table">
       <table>
@@ -63,22 +193,22 @@
         </thead>
         <tbody>
           <tr>
-            <td></td>
+            <th></th>
             <!-- comment -->
 
-            <td>2022-06-12</td>
+            <th>2022-06-12</th>
 
-            <td>2022-06-13</td>
+            <th>2022-06-13</th>
 
-            <td>2022-06-14</td>
+            <th>2022-06-14</th>
 
-            <td>2022-06-15</td>
+            <th>2022-06-15</th>
 
-            <td>2022-06-16</td>
+            <th>2022-06-16</th>
 
-            <td>2022-06-17</td>
+            <th>2022-06-17</th>
 
-            <td>2022-06-18</td>
+            <th>2022-06-18</th>
           </tr>
 
           <tr>
@@ -239,42 +369,6 @@
 
           <tr>
             <td>8</td>
-
-            <td>-</td>
-
-            <td>-</td>
-
-            <td>-</td>
-
-            <td>-</td>
-
-            <td>-</td>
-
-            <td>-</td>
-
-            <td>-</td>
-          </tr>
-
-          <tr>
-            <td>9</td>
-
-            <td>-</td>
-
-            <td>-</td>
-
-            <td>-</td>
-
-            <td>-</td>
-
-            <td>-</td>
-
-            <td>-</td>
-
-            <td>-</td>
-          </tr>
-
-          <tr>
-            <td>10</td>
 
             <td>-</td>
 

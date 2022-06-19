@@ -2,15 +2,32 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.Calendar" %>
 <%@page import="java.util.Date" %>
+<%@page import="java.util.ArrayList" %>
+<%@page import="model.Attendance" %>
 <!doctype html>
 <html lang="en">
     <head>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link rel="Stylesheet" href="css/bootstrap.css" type="text/css">
+        <link rel="Stylesheet" href="css/bootstrap.min.css" type="text/css">
+        <link rel="Stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
+        <link href="css/mystyle.css" rel="stylesheet">
+        <script src="css/jquery_002.js" type="text/javascript"></script>
+
+        <script src="css/jquery_003.js" type="text/javascript"></script>
+
+        <script src="css/jquery.js" type="text/javascript"></script>
+
+        <script src="css/jquery-1.8.3.js" type="text/javascript"></script>
+
+        <script src="css/jquery-ui.js" type="text/javascript"></script>
+
+        <script src="css/jquery.alerts.js" type="text/javascript"></script>
         <title>
-            Detail Sesion
+            Detail Session
         </title>
     </head>
 
@@ -19,6 +36,7 @@
             <ul class="nav navbar-nav">
                 <li> <a href="Home">Home</a> </li>
                 <li> <a href="Schedule">View Schedule</a></li>
+                <li> <a style="color: black;">Detail Session</a></li>
             </ul>
         </nav>
         <div class="container">
@@ -30,11 +48,10 @@
         </div>
         <div>
             <c:if test="${requestScope.groupList ne null}">
-                <table>
-                    <tbody>
+                <table class="Detail_table">
                         <c:forEach items="${requestScope.groupList}" var="s">
                             <tr>
-                                <td>Session</td><td>${s.sessionId}</td>
+                                <td>Session</td><td>${s.sessionNumber}</td>
                             </tr>
                             <tr>
                                 <td>Group Name</td><td>${s.groupId.groupName}</td>
@@ -54,16 +71,21 @@
                             <tr>
                                 <td>Take Attendance</td>
                                 <td>
+                                    <%        
+                                        ArrayList<Attendance> a = (ArrayList<Attendance>) request.getAttribute("listeditstudent");
+                                        if(a.size()==0){
+                                    %>
                                     <form action="ListAttendance" method="post">
                                         <button type="submit" name="takeattend" value="${s.sessionId}"  class="btn-link">Take</button>
                                     </form>
+                                    <%}else{%>
                                     <form action="EditAttendance" method="post">
                                         <button type="submit" name="editattend" value="${s.sessionId}"  class="btn-link">Edit</button>
                                     </form>
+                                    <%}%>
                                 </td>
                             </tr>
                         </c:forEach>
-                    </tbody>
                 </table>
             </c:if>
         </div>

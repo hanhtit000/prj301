@@ -25,19 +25,7 @@ body{
     border-color: rgb(0, 0, 0);
     padding-left: 10px;
 }
-
 .Schedule_table table tr td:first-child{
     text-align: center;
     padding-left: 0;
-}
-.Detail_table{
-    margin-left: 20px;
-}
-.Detail_table tr td{
-    text-align: left;
-    min-width: 200px;
-}
-.Detail_table tr td form button{
-    border: 0px;
-    padding: 0;
 }

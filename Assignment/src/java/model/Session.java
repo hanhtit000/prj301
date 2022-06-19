@@ -9,6 +9,15 @@ import java.sql.Date;
 public class Session {
 
     private int sessionId;
+    private int sessionNumber;
+
+    public int getSessionNumber() {
+        return sessionNumber;
+    }
+
+    public void setSessionNumber(int sessionNumber) {
+        this.sessionNumber = sessionNumber;
+    }
     private Group groupId;
     private Instructor instructorId;
     private int slot;

@@ -33,7 +33,7 @@ public class DetailDBcontext extends DBContext<Session> {
     public ArrayList<Session> get(int x) {
         ArrayList<Session> table = new ArrayList<>();
         try {
-            String sql = "with t as (SELECT s.SessionID, s.GroupID, g.GroupName, g.CourseID, s.InstructorID, s.Slot, s.RoomName\n"
+            String sql = "with t as (SELECT s.SessionID, s.SessionNumber, s.GroupID, g.GroupName, g.CourseID, s.InstructorID, s.Slot, s.RoomName\n"
                     + "FROM [dbo].[Session] s, [dbo].[Group] g\n"
                     + "where s.GroupId=g.GroupId)\n"
                     + "select * from t, [dbo].[Course] as c, [dbo].[Instructor] as i\n"
@@ -48,6 +48,7 @@ public class DetailDBcontext extends DBContext<Session> {
                 Session r = new Session();
                 r.setSessionId(rs.getInt("SessionID"));
                 Group g = new Group();
+                r.setSessionNumber(rs.getInt("SessionNumber"));
                 g.setGroupId(rs.getInt("GroupID"));
                 g.setGroupName(rs.getString("GroupName"));
                 Course c = new Course();

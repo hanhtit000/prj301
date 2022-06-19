@@ -55,7 +55,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Slot</th>
+                            <th></th>
                             <th>Sunday</th>
                             <th>Monday</th>
                             <th>Tuesday</th>
@@ -75,7 +75,7 @@
                             int d1 = ist.get(Calendar.DAY_OF_WEEK);
                         %>
                         <tr>
-                            <th></th><!-- comment -->
+                            <th>Slot</th><!-- comment -->
                                 <%
                             for(int j=d-d1+1;j<d-d1+8;j++){
                                 Date date1 = Date.valueOf(LocalDate.ofYearDay(y, j));

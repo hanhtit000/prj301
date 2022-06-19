@@ -33,7 +33,6 @@
             <ul class="nav navbar-nav">
                 <li> <a href="Home">Home</a> </li>
                 <li> <a href="Schedule">View Schedule</a></li>
-                <li> <a style="color: black;">Take Attendance</a></li>
             </ul>
         </nav>
         <div class="container">

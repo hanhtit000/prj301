@@ -16,6 +16,7 @@
         <link rel="Stylesheet" href="css/bootstrap.min.css" type="text/css">
         <link rel="Stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
         <link href="css/mystyle.css" rel="stylesheet">
+        <link href="css/mystyle_1.css" rel="stylesheet">
         <script src="css/jquery_002.js" type="text/javascript"></script>
 
         <script src="css/jquery_003.js" type="text/javascript"></script>

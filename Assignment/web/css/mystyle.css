@@ -54,7 +54,7 @@ body{
     margin-left: auto;
     margin-right: auto;
 }
-.Attendance_table table tbody tr th{
+.Attendance_table table thead tr th{
     text-align: center;
     padding: 10px 20px;
     background-color: rgb(184, 184, 254);

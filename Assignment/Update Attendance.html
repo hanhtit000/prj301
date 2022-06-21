@@ -128,7 +128,7 @@
       href="./Update Attendance_files/bootstrap-theme.min.css"
       type="text/css"
     />
-    <link href="/web/css/mystyle.css" rel="stylesheet" />
+    <link href="web/css/mystyle.css" rel="stylesheet" />
     <script
       src="./Update Attendance_files/jquery_002.js.tải xuống"
       type="text/javascript"
@@ -178,63 +178,76 @@
         </div>
       </div>
     </div>
-    <form
-      action="http://localhost:9999/Assignment/ChangeAttendance"
-      method="post"
-    >
-      <h1>Update Attendance</h1>
-      <table class="Attendance">
-        <tr>
-          <th>ID</th>
-          <th>Student Code</th>
-          <th>Sur Name</th>
-          <th>Mid Name</th>
-          <th>Given Name</th>
-          <th>Message</th>
-          <th>Attendance</th>
-        </tr>
-        <input type="hidden" value="39" name="sid" />
-        <tr>
-          <td><input type="hidden" value="6" name="id1" />6</td>
-          <td><input type="hidden" value="CU2       " name="code1" />CU2</td>
-          <td><input type="hidden" value="Luyện" name="sur1" />Luyện</td>
-          <td><input type="hidden" value="" name="mid1" /></td>
-          <td><input type="hidden" value="Khí" name="given1" />Khí</td>
-          <td><input type="text" value="" name="mess1" /></td>
-          <td>
-            <input type="radio" name="cbox1" value="Absent" />Absent
-            <input
-              type="radio"
-              checked="checked"
-              name="cbox1"
-              value="Attended"
-            />Attended
-          </td>
-        </tr>
+    <div>
+      <form
+        action="http://localhost:9999/Assignment/ChangeAttendance"
+        method="post"
+      >
+        <h1>Update Attendance</h1>
+        <div class="Attendance_table">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Student Code</th>
+                <th>Sur Name</th>
+                <th>Mid Name</th>
+                <th>Given Name</th>
+                <th>Message</th>
+                <th>Attendance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <input type="hidden" value="39" name="sid" />
 
-        <tr>
-          <td><input type="hidden" value="10" name="id2" />10</td>
-          <td><input type="hidden" value="CU6       " name="code2" />CU6</td>
-          <td><input type="hidden" value="Cổ" name="sur2" />Cổ</td>
-          <td><input type="hidden" value="" name="mid2" /></td>
-          <td><input type="hidden" value="Linh" name="given2" />Linh</td>
-          <td><input type="text" value="" name="mess2" /></td>
-          <td>
-            <input type="radio" name="cbox2" value="Absent" />Absent
-            <input
-              type="radio"
-              checked="checked"
-              name="cbox2"
-              value="Attended"
-            />Attended
-          </td>
-        </tr>
+              <tr>
+                <td><input type="hidden" value="6" name="id3" />6</td>
+                <td>
+                  <input type="hidden" value="CU2       " name="code3" />CU2
+                </td>
+                <td><input type="hidden" value="Luyện" name="sur3" />Luyện</td>
+                <td><input type="hidden" value="" name="mid3" /></td>
+                <td><input type="hidden" value="Khí" name="given3" />Khí</td>
+                <td><input type="text" value="" name="mess3" /></td>
+                <td>
+                  <input
+                    type="radio"
+                    checked="checked"
+                    name="cbox3"
+                    value="Absent"
+                  />Absent
+                  <input type="radio" name="cbox3" value="Attended" />Attended
+                </td>
+              </tr>
 
-        <input type="hidden" value="3" name="count" />
-      </table>
-      <div class="last">
-        <input  type="submit" name="Send" />
-      </div>
-    </form>
+              <tr>
+                <td><input type="hidden" value="10" name="id4" />10</td>
+                <td>
+                  <input type="hidden" value="CU6       " name="code4" />CU6
+                </td>
+                <td><input type="hidden" value="Cổ" name="sur4" />Cổ</td>
+                <td><input type="hidden" value="" name="mid4" /></td>
+                <td><input type="hidden" value="Linh" name="given4" />Linh</td>
+                <td><input type="text" value="" name="mess4" /></td>
+                <td>
+                  <input
+                    type="radio"
+                    checked="checked"
+                    name="cbox4"
+                    value="Absent"
+                  />Absent
+                  <input type="radio" name="cbox4" value="Attended" />Attended
+                </td>
+              </tr>
+
+              <input type="hidden" value="5" name="count" />
+            </tbody>
+          </table>
+        </div>
+        <div class="last">
+          <input type="submit" name="Send" />
+        </div>
+      </form>
+    </div>
   </body>
 </html>

@@ -6,7 +6,6 @@ package controller;
 
 import dal.StudentDBContext;
 import dal.DBContext;
-import dal.ScheduleDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,8 +13,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import model.Attendance;
-import model.Session;
 import model.Student;
 
 /**
@@ -81,7 +78,6 @@ public class ListAttendance extends HttpServlet {
         ArrayList<Student> list = att.get(ta);
         request.setAttribute("liststudent", list);
         request.setAttribute("sid", ta);
-        
         request.getRequestDispatcher("Take Attendance.jsp").forward(request, response);
         
 

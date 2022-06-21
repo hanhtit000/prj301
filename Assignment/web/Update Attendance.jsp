@@ -44,53 +44,53 @@
             </div>
         </div>
         <div>
-        <form action="ChangeAttendance" method="post">
-            <h1>Update Attendance</h1>
-            <div class="Attendance_table">
-            <table >
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Student Code</th>
-                        <th>Sur Name</th>
-                        <th>Mid Name</th>
-                        <th>Given Name</th>
-                        <th>Message</th>
-                        <th>Attendance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                <input type="hidden" value="${requestScope.sid}" name="sid" />
-                <% int i=1;%>
-                <c:forEach items="${requestScope.listeditstudent}" var="stu">
-                    <tr>
-                        <td><input type="hidden" value="${stu.studentId.studentId}" name="id<%=i%>" />${stu.studentId.studentId}</td>
-                        <td><input type="hidden" value="${stu.studentId.studentCode}" name="code<%=i%>" />${stu.studentId.studentCode}</td>
-                        <td><input type="hidden" value="${stu.studentId.surName}" name="sur<%=i%>" />${stu.studentId.surName}</td>
-                        <td><input type="hidden" value="${stu.studentId.midName}" name="mid<%=i%>" />${stu.studentId.midName}</td>
-                        <td><input type="hidden" value="${stu.studentId.givenName}" name="given<%=i%>" />${stu.studentId.givenName}</td>
-                        <td><input type="text" value="${stu.message}" name="mess<%=i%>"/></td>
-                        <td>
-                            <c:if test="${stu.attendanceStatus.equals('Attended')}">
-                            <input type="radio" name="cbox<%=i%>" value="Absent"/>Absent  
-                            <input type="radio" checked="checked" name="cbox<%=i%>" value="Attended"/>Attended
-                            </c:if>
-                            <c:if test="${!stu.attendanceStatus.equals('Attended')}">
-                            <input type="radio" checked="checked" name="cbox<%=i%>" value="Absent"/>Absent  
-                            <input type="radio" name="cbox<%=i%>" value="Attended"/>Attended
-                            </c:if>
-                        </td>
-                        <%i++;%>
-                    </tr>
-                </c:forEach>
-                <input type="hidden" value="<%=i%>" name="count" />
-                </tbody>
-            </table>
-            </div>
+            <form action="ChangeAttendance" method="post">
+                <h1>Update Attendance</h1>
+                <div class="Attendance_table">
+                    <table >
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Student Code</th>
+                                <th>Sur Name</th>
+                                <th>Mid Name</th>
+                                <th>Given Name</th>
+                                <th>Message</th>
+                                <th>Attendance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <input type="hidden" value="${requestScope.sid}" name="sid" />
+                        <% int i=1;%>
+                        <c:forEach items="${requestScope.listeditstudent}" var="stu">
+                            <tr>
+                                <td><input type="hidden" value="${stu.studentId.studentId}" name="id<%=i%>" />${stu.studentId.studentId}</td>
+                                <td><input type="hidden" value="${stu.studentId.studentCode}" name="code<%=i%>" />${stu.studentId.studentCode}</td>
+                                <td><input type="hidden" value="${stu.studentId.surName}" name="sur<%=i%>" />${stu.studentId.surName}</td>
+                                <td><input type="hidden" value="${stu.studentId.midName}" name="mid<%=i%>" />${stu.studentId.midName}</td>
+                                <td><input type="hidden" value="${stu.studentId.givenName}" name="given<%=i%>" />${stu.studentId.givenName}</td>
+                                <td><input type="text" value="${stu.message}" name="mess<%=i%>"/></td>
+                                <td>
+                                    <c:if test="${stu.attendanceStatus.equals('Attended')}">
+                                        <input type="radio" name="cbox<%=i%>" value="Absent"/>Absent  
+                                        <input type="radio" checked="checked" name="cbox<%=i%>" value="Attended"/>Attended
+                                    </c:if>
+                                    <c:if test="${!stu.attendanceStatus.equals('Attended')}">
+                                        <input type="radio" checked="checked" name="cbox<%=i%>" value="Absent"/>Absent  
+                                        <input type="radio" name="cbox<%=i%>" value="Attended"/>Attended
+                                    </c:if>
+                                </td>
+                                <%i++;%>
+                            </tr>
+                        </c:forEach>
+                        <input type="hidden" value="<%=i%>" name="count" />
+                        </tbody>
+                    </table>
+                </div>
                 <div class="last">
-            <input type="submit" name="Send"/>
+                    <input type="submit" name="Send"/>
                 </div>
-        </form>
-                </div>
+            </form>
+        </div>
     </body>
 </html>

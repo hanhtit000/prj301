@@ -25,27 +25,19 @@ body{
     border-color: rgb(0, 0, 0);
     padding-left: 10px;
 }
+
 .Schedule_table table tr td:first-child{
     text-align: center;
     padding-left: 0;
 }
-.Attendance_table table{
-    margin-left: auto;
-    margin-right: auto;
+.Detail_table{
+    margin-left: 20px;
 }
-.Attendance_table table thead tr th{
-    text-align: center;
-    padding: 10px 20px;
-    background-color: rgb(184, 184, 254);
-    border: solid 1px;
-    border-color: rgb(0, 0, 0);
+.Detail_table tr td{
+    text-align: left;
+    min-width: 200px;
 }
-.Attendance_table table tbody tr td{
-    border: solid 1px;
-    padding: 10px 20px;
-    border-color: rgb(0, 0, 0);
-    text-align: center;
-}
-.last{
-    text-align: center;
+.Detail_table tr td form button{
+    border: 0px;
+    padding: 0;
 }

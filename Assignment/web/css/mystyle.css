@@ -10,6 +10,7 @@ body{
 .Schedule_table table{
     margin-left: auto;
     margin-right: auto;
+    
 }
 .Schedule_table table tr th{
     text-align: center;
@@ -18,16 +19,17 @@ body{
     border: solid 1px;
     border-color: rgb(0, 0, 0);
 }
+
 .Schedule_table table tr td{
     border: solid 1px;
     border-color: rgb(0, 0, 0);
     padding-left: 10px;
 }
+
 .Schedule_table table tr td:first-child{
     text-align: center;
     padding-left: 0;
 }
-
 .Detail_table{
     margin-left: 20px;
 }
@@ -39,7 +41,6 @@ body{
     border: 0px;
     padding: 0;
 }
-
 .Attendance {
     margin-left: auto;
     margin-right: auto;

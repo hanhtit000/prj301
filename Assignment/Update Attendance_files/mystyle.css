@@ -41,3 +41,23 @@ body{
     border: 0px;
     padding: 0;
 }
+.Attendance_table table{
+    margin-left: auto;
+    margin-right: auto;
+}
+.Attendance_table table thead tr th{
+    text-align: center;
+    padding: 10px 20px;
+    background-color: rgb(184, 184, 254);
+    border: solid 1px;
+    border-color: rgb(0, 0, 0);
+}
+.Attendance_table table tbody tr td{
+    border: solid 1px;
+    padding: 10px 20px;
+    border-color: rgb(0, 0, 0);
+    text-align: center;
+}
+.last{
+    text-align: center;
+}

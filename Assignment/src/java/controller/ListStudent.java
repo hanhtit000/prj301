@@ -31,9 +31,7 @@ public class ListStudent extends HttpServlet {
     throws ServletException, IOException {
         StudentDBContext stu= new StudentDBContext();
         CourseDBContext cou=new CourseDBContext();
-        stu.
         }
-    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 

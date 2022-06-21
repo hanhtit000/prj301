@@ -45,8 +45,8 @@
         </div>
         <form action="ChangeAttendance" method="post">
             <h1>Update Attendance</h1>
-            <table>
-                <thead>
+            <table class="Attendance">
+                <tbody>
                     <tr>
                         <th>ID</th>
                         <th>Student Code</th>
@@ -56,8 +56,6 @@
                         <th>Message</th>
                         <th>Attendance</th>
                     </tr>
-                </thead>
-                <tbody>
                 <input type="hidden" value="${requestScope.sid}" name="sid" />
                 <% int i=1;%>
                 <c:forEach items="${requestScope.listeditstudent}" var="stu">
@@ -70,12 +68,12 @@
                         <td><input type="text" value="${stu.message}" name="mess<%=i%>"/></td>
                         <td>
                             <c:if test="${stu.attendanceStatus.equals('Attended')}">
-                            <input type="radio" name="cbox<%=i%>" value="Absent"/>Absent  
-                            <input type="radio" checked="checked" name="cbox<%=i%>" value="Attended"/>Attended
+                                <input type="radio" name="cbox<%=i%>" value="Absent"/>Absent  
+                                <input type="radio" checked="checked" name="cbox<%=i%>" value="Attended"/>Attended
                             </c:if>
                             <c:if test="${!stu.attendanceStatus.equals('Attended')}">
-                            <input type="radio" checked="checked" name="cbox<%=i%>" value="Absent"/>Absent  
-                            <input type="radio" name="cbox<%=i%>" value="Attended"/>Attended
+                                <input type="radio" checked="checked" name="cbox<%=i%>" value="Absent"/>Absent  
+                                <input type="radio" name="cbox<%=i%>" value="Attended"/>Attended
                             </c:if>
                         </td>
                         <%i++;%>
@@ -84,7 +82,9 @@
                 <input type="hidden" value="<%=i%>" name="count" />
                 </tbody>
             </table>
-            <input type="submit" name="Send"/>
+            <div class="last">
+                <input  type="submit" name="Send" />
+            </div>
         </form>
     </body>
 </html>

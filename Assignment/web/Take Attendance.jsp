@@ -28,6 +28,21 @@
 
         <script src="css/jquery.alerts.js" type="text/javascript"></script>
     </head>
+    <link rel="Stylesheet" href="css/bootstrap.css" type="text/css">
+        <link rel="Stylesheet" href="css/bootstrap.min.css" type="text/css">
+        <link rel="Stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
+        <link href="css/mystyle.css" rel="stylesheet">
+        <script src="css/jquery_002.js" type="text/javascript"></script>
+
+        <script src="css/jquery_003.js" type="text/javascript"></script>
+
+        <script src="css/jquery.js" type="text/javascript"></script>
+
+        <script src="css/jquery-1.8.3.js" type="text/javascript"></script>
+
+        <script src="css/jquery-ui.js" type="text/javascript"></script>
+
+        <script src="css/jquery.alerts.js" type="text/javascript"></script>
     <body>
         <nav class="navbar" role="navigation">
             <ul class="nav navbar-nav">
@@ -43,10 +58,12 @@
                 </div>    
             </div>
         </div>
+        <div>
         <form action="TakeAttendance" method="post">
             <h1>Take Attendance</h1>
-            <table class="Attendance">
-                <tbody>
+            <div class="Attendance_table">
+            <table>
+                <thead>
                     <tr>
                         <th>ID</th>
                         <th>Student Code</th>
@@ -56,6 +73,8 @@
                         <th>Message</th>
                         <th>Attendance</th>
                     </tr>
+                </thead>
+                <tbody>
                 <input type="hidden" value="${requestScope.sid}" name="sid" />
                 <% int i=1;%>
                 <c:forEach items="${requestScope.liststudent}" var="stu">
@@ -75,9 +94,11 @@
                 <input type="hidden" value="<%=i%>" name="count" />
                 </tbody>
             </table>
+                </div>
             <div class="last">
-                <input  type="submit" name="Send" />
-            </div>
+            <input type="submit" name="Send"/>
+                </div>
         </form>
+                </div>
     </body>
 </html>

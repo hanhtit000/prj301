@@ -43,10 +43,12 @@
                 </div>    
             </div>
         </div>
+        <div>
         <form action="ChangeAttendance" method="post">
             <h1>Update Attendance</h1>
-            <table class="Attendance">
-                <tbody>
+            <div class="Attendance_table">
+            <table >
+                <thead>
                     <tr>
                         <th>ID</th>
                         <th>Student Code</th>
@@ -56,6 +58,8 @@
                         <th>Message</th>
                         <th>Attendance</th>
                     </tr>
+                </thead>
+                <tbody>
                 <input type="hidden" value="${requestScope.sid}" name="sid" />
                 <% int i=1;%>
                 <c:forEach items="${requestScope.listeditstudent}" var="stu">
@@ -68,12 +72,12 @@
                         <td><input type="text" value="${stu.message}" name="mess<%=i%>"/></td>
                         <td>
                             <c:if test="${stu.attendanceStatus.equals('Attended')}">
-                                <input type="radio" name="cbox<%=i%>" value="Absent"/>Absent  
-                                <input type="radio" checked="checked" name="cbox<%=i%>" value="Attended"/>Attended
+                            <input type="radio" name="cbox<%=i%>" value="Absent"/>Absent  
+                            <input type="radio" checked="checked" name="cbox<%=i%>" value="Attended"/>Attended
                             </c:if>
                             <c:if test="${!stu.attendanceStatus.equals('Attended')}">
-                                <input type="radio" checked="checked" name="cbox<%=i%>" value="Absent"/>Absent  
-                                <input type="radio" name="cbox<%=i%>" value="Attended"/>Attended
+                            <input type="radio" checked="checked" name="cbox<%=i%>" value="Absent"/>Absent  
+                            <input type="radio" name="cbox<%=i%>" value="Attended"/>Attended
                             </c:if>
                         </td>
                         <%i++;%>
@@ -82,9 +86,11 @@
                 <input type="hidden" value="<%=i%>" name="count" />
                 </tbody>
             </table>
-            <div class="last">
-                <input  type="submit" name="Send" />
             </div>
+                <div class="last">
+            <input type="submit" name="Send"/>
+                </div>
         </form>
+                </div>
     </body>
 </html>

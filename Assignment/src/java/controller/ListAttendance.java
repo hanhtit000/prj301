@@ -78,8 +78,11 @@ public class ListAttendance extends HttpServlet {
         ArrayList<Student> list = att.get(ta);
         request.setAttribute("liststudent", list);
         request.setAttribute("sid", ta);
+        int group = Integer.parseInt((String) request.getParameter("group"));
+        request.setAttribute("groupid", group);
+        String groupname = (String) request.getParameter("groupname");
+        request.setAttribute("groupname", groupname);
         request.getRequestDispatcher("Take Attendance.jsp").forward(request, response);
-        
 
     }
 

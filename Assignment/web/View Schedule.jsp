@@ -5,6 +5,8 @@
 <%@page import="java.time.LocalDate" %>
 <%@page import="java.sql.Date" %>
 <%@page import="model.Session" %>
+<%@page import="model.Attendance" %>
+<%@page import="dal.UpdateDBContext" %>
 <!doctype html>
 <html lang="en">
     <head>
@@ -50,6 +52,79 @@
                 Activities for you in this current week
             </p>
         </div>
+        <div>
+            Year:
+            <form action="Schedule" method="get">
+                <select name="year" onchange="this.form.submit()">
+                    <%
+                        Calendar instance = Calendar.getInstance();
+                        int y = instance.get(Calendar.YEAR);
+                        for(int j=y-2;j<=y+2;j++){
+                    if(j!=y){%>
+                    <option value="<%=j%>">${j}</option>
+                    <%}else{%>
+                    <option selected="selected" value="<%=y%>">${y}</option>
+                    <%}}%>
+                </select>
+            </form><br>
+            Week:
+            <form action="Schedule" method="post">
+                <select name="week" onchange="this.form.submit()">
+                    <%
+                        Calendar ist = Calendar.getInstance();
+                        int j= instance.get(Calendar.DAY_OF_YEAR);
+                        Date day = Date.valueOf(LocalDate.ofYearDay(y, j));
+                        int y1= Integer.parseInt((String) request.getAttribute("year"));
+                        if(Calendar.YEAR>y1){
+                            while(Calendar.YEAR>y1)
+                            {
+                                ist.add(Calendar.DATE, -365);
+                            }
+                        }
+                        else
+                        {
+                            while(Calendar.YEAR<y1)
+                            {
+                                ist.add(Calendar.DATE, 365);
+                            }
+                        }
+                        int dd = ist.get(Calendar.DAY_OF_MONTH);
+                        int mm =  ist.get(Calendar.MONTH)+1;
+                        int dow= ist.get(Calendar.DAY_OF_YEAR);
+                        ist.add(Calendar.DATE, -dow+2);
+                        j= instance.get(Calendar.DAY_OF_YEAR);
+                        Date end = Date.valueOf(LocalDate.ofYearDay(y, j));        
+                        int ed = ist.get(Calendar.DAY_OF_MONTH);
+                        int em = ist.get(Calendar.MONTH)+1;
+                        ist.add(Calendar.DATE, -6);
+                        j= instance.get(Calendar.DAY_OF_YEAR);
+                        Date start= Date.valueOf(LocalDate.ofYearDay(y, j));
+                        int sd = ist.get(Calendar.DAY_OF_MONTH);
+                        int sm = ist.get(Calendar.MONTH)+1;
+                        for(int i=0;i<=53;i++){
+                        if(day.compareTo(start)>=0 && day.compareTo(end)<=0){
+                    %>
+                    <option selected="selected" value=<%=i%>>${sd}/${sm} To ${ed}/${em}</option>
+                    <%
+                        }else{
+                    %>
+                    <option value=<%=i%>>${sd}/${sm} To ${ed}/${em}</option>
+                    <%}
+                        instance.add(Calendar.DATE, 1);
+                        j= instance.get(Calendar.DAY_OF_YEAR);
+                        start= Date.valueOf(LocalDate.ofYearDay(y, j));
+                        sd = ist.get(Calendar.DAY_OF_MONTH);
+                        sm = ist.get(Calendar.MONTH)+1;
+                        instance.add(Calendar.DATE, 6);
+                        j= instance.get(Calendar.DAY_OF_YEAR);
+                        end = Date.valueOf(LocalDate.ofYearDay(y, j));     
+                        ed = ist.get(Calendar.DAY_OF_MONTH);
+                        em = ist.get(Calendar.MONTH)+1;
+                        }
+                    %>
+                </select>
+            </form><br>
+        </div>
         <div class="Schedule_table">
             <c:if test="${requestScope.scheduleList ne null}">
                 <table>
@@ -69,15 +144,15 @@
                         <%
                             ArrayList<Session> s = (ArrayList<Session>) request.getAttribute("scheduleList");
                             int i=0;
-                            Calendar ist= Calendar.getInstance();
-                            int y =ist.get(Calendar.YEAR);
+                            ist= Calendar.getInstance();
+                            y =ist.get(Calendar.YEAR);
                             int d = ist.get(Calendar.DAY_OF_YEAR);
                             int d1 = ist.get(Calendar.DAY_OF_WEEK);
                         %>
                         <tr>
                             <th>Slot</th><!-- comment -->
                                 <%
-                            for(int j=d-d1+1;j<d-d1+8;j++){
+                            for(j=d-d1+1;j<d-d1+8;j++){
                                 Date date1 = Date.valueOf(LocalDate.ofYearDay(y, j));
                                 %>
                             <th><%=date1%></th>
@@ -91,7 +166,7 @@
                         <tr>
                             <td><%=i%></td>
                             <%
-                                for(int j=d-d1+1;j<d-d1+8;j++){
+                                for(j=d-d1+1;j<d-d1+8;j++){
                                     int kt=0;
                                     Date date = Date.valueOf(LocalDate.ofYearDay(y, j));
                                     for(Session c: s){
@@ -100,7 +175,29 @@
                             %>
                             <td><%=c.getGroupId().getCourseId().getCourseName()%>
                                 <br> at <%=c.getRoomName()%>
-                                <br><a href="Detail?sessionId=<%=c.getSessionId()%>">Detail</a>
+                                <%        
+                                    UpdateDBContext att = new UpdateDBContext();
+                                    ArrayList<Attendance> a = att.get(c.getSessionId());
+                                        if(a.size()==0){
+                                        Date date2 = Date.valueOf(LocalDate.ofYearDay(y, d));
+                                        if(date2.compareTo(date)>0){
+                                %>
+                                <h5 style="color: gray;">Not yet</h5>                                
+                                <form action="ListAttendance" method="post">
+                                    <button type="submit" name="takeattend" value="<%=c.getSessionId()%>"  class="btn-link">Take</button>
+                                    <input type="hidden" name="group" value="<%=c.getGroupId().getGroupId()%>"/>
+                                    <input type="hidden" name="groupname" value="<%=c.getGroupId().getGroupName()%>"/>
+                                </form>
+                                <%}else{%>
+                                <h5 style="color: gray;">Not yet</h5> 
+                                <%}}else{%>
+                                <h5 style="color: green;">Attended</h5>
+                                <form action="EditAttendance" method="post">
+                                    <button type="submit" name="editattend" value="<%=c.getSessionId()%>"  class="btn-link">Edit</button>
+                                    <input type="hidden" name="group" value="<%=c.getGroupId().getGroupId()%>"/>
+                                    <input type="hidden" name="groupname" value="<%=c.getGroupId().getGroupName()%>"/>
+                                </form>
+                                <%}%>
                             </td>
                             <%}}
                             if(kt!=1){%>                      

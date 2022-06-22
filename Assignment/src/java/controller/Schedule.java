@@ -7,6 +7,7 @@ package controller;
 
 import dal.DBContext;
 import dal.ScheduleDBContext;
+import dal.UpdateDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,6 +17,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import model.Attendance;
 import model.Session;
 
 /**
@@ -36,6 +39,7 @@ public class Schedule extends HttpServlet {
         DBContext<Session> sch = new ScheduleDBContext();
         ArrayList<Session> list = sch.list();
         request.setAttribute("scheduleList", list);
+        
         request.getRequestDispatcher("View Schedule.jsp").forward(request, response);
     } 
 
@@ -50,7 +54,12 @@ public class Schedule extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String kt = (String) request.getParameter("year");
+        int y;
+        if(kt == null) y=Calendar.YEAR;
+        else y= Integer.parseInt(kt);
+        request.setAttribute("year", y);
+        request.getRequestDispatcher("View Schedule.jsp").forward(request, response);
     } 
 
     /** 

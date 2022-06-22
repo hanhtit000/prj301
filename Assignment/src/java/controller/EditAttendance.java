@@ -73,6 +73,10 @@ public class EditAttendance extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         int ta = Integer.parseInt((String) request.getParameter("editattend"));
+        int group = Integer.parseInt((String) request.getParameter("group"));
+        request.setAttribute("groupid", group);
+        String groupname = (String) request.getParameter("groupname");
+        request.setAttribute("groupname", groupname);
         DBContext<Attendance> att = new UpdateDBContext();
         ArrayList<Attendance> list = att.get(ta);
         request.setAttribute("listeditstudent", list);

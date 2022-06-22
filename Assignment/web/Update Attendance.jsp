@@ -51,6 +51,7 @@
                     <table >
                         <thead>
                             <tr>
+                                <th>Group</th>
                                 <th>ID</th>
                                 <th>Student Code</th>
                                 <th>Sur Name</th>
@@ -65,6 +66,7 @@
                         <% int i=1;%>
                         <c:forEach items="${requestScope.listeditstudent}" var="stu">
                             <tr>
+                                <td><a href="">${requestScope.groupname}</a></td>
                                 <td><input type="hidden" value="${stu.studentId.studentId}" name="id<%=i%>" />${stu.studentId.studentId}</td>
                                 <td><input type="hidden" value="${stu.studentId.studentCode}" name="code<%=i%>" />${stu.studentId.studentCode}</td>
                                 <td><input type="hidden" value="${stu.studentId.surName}" name="sur<%=i%>" />${stu.studentId.surName}</td>

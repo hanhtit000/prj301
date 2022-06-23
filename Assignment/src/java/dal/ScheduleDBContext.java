@@ -20,8 +20,7 @@ import model.Session;
 
 public class ScheduleDBContext extends DBContext<Session> {
 
-    @Override
-    public ArrayList<Session> list() {
+    public ArrayList<Session> list(Date from, Date to) {
         ArrayList<Session> table = new ArrayList<>();
         try {
             String sql = "with t as (SELECT s.SessionID, s.GroupID, g.GroupName, g.CourseID, s.InstructorID, s.Slot, s.RoomName, s.Date\n"
@@ -31,16 +30,9 @@ public class ScheduleDBContext extends DBContext<Session> {
                     + "where t.CourseID=c.CourseID\n"
                     + "and t.Date >= ? and t.Date <= ?";
             Calendar ist= Calendar.getInstance();
-            int y =ist.get(Calendar.YEAR);
-            int d = ist.get(Calendar.DAY_OF_YEAR);
-            int d1 = ist.get(Calendar.DAY_OF_WEEK);
-            Date from = Date.valueOf(LocalDate.ofYearDay(y, d-d1+1));
-            Date to = Date.valueOf(LocalDate.ofYearDay(y, d-d1+7));
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setDate(1, from);
             stm.setDate(2, to);
-//            stm.setInt(1, 10);
-//            stm.setInt(2, 20);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Session r = new Session();
@@ -90,6 +82,11 @@ public class ScheduleDBContext extends DBContext<Session> {
 
     @Override
     public void update(ArrayList<Session> entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ArrayList<Session> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

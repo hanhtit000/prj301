@@ -24,10 +24,6 @@
         <servlet-name>ListStudent</servlet-name>
         <servlet-class>controller.ListStudent</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ToSchedule</servlet-name>
-        <servlet-class>controller.ToSchedule</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>ListAttendance</servlet-name>
         <url-pattern>/ListAttendance</url-pattern>
@@ -51,10 +47,6 @@
     <servlet-mapping>
         <servlet-name>ListStudent</servlet-name>
         <url-pattern>/ListStudent</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ToSchedule</servlet-name>
-        <url-pattern>/ToSchedule</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

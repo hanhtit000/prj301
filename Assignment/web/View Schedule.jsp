@@ -61,9 +61,9 @@
                         int y = instance.get(Calendar.YEAR);
                         for(int j=y-2;j<=y+2;j++){
                     if(j!=y){%>
-                    <option value="<%=j%>">${j}</option>
+                    <option value="<%=j%>"><%=j%></option>
                     <%}else{%>
-                    <option selected="selected" value="<%=y%>">${y}</option>
+                    <option selected="selected" value="<%=y%>"><%=y%></option>
                     <%}}%>
                 </select>
             </form><br>
@@ -88,8 +88,6 @@
                                 ist.add(Calendar.DATE, 365);
                             }
                         }
-                        int dd = ist.get(Calendar.DAY_OF_MONTH);
-                        int mm =  ist.get(Calendar.MONTH)+1;
                         int dow= ist.get(Calendar.DAY_OF_YEAR);
                         ist.add(Calendar.DATE, -dow+2);
                         j= instance.get(Calendar.DAY_OF_YEAR);
@@ -104,11 +102,11 @@
                         for(int i=0;i<=53;i++){
                         if(day.compareTo(start)>=0 && day.compareTo(end)<=0){
                     %>
-                    <option selected="selected" value=<%=i%>>${sd}/${sm} To ${ed}/${em}</option>
+                    <option selected="selected" value=<%=i%>><%=sd%>/<%=sm%> To <%=ed%>/<%=em%></option>
                     <%
                         }else{
                     %>
-                    <option value=<%=i%>>${sd}/${sm} To ${ed}/${em}</option>
+                    <option value=<%=i%>><%=sd%>/<%=sm%> To <%=ed%>/<%=em%></option>
                     <%}
                         instance.add(Calendar.DATE, 1);
                         j= instance.get(Calendar.DAY_OF_YEAR);

@@ -5,27 +5,19 @@
 
 package controller;
 
-import dal.DBContext;
-import dal.ScheduleDBContext;
-import dal.UpdateDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Calendar;
-import model.Attendance;
-import model.Session;
 
 /**
  *
  * @author ASUS
  */
-public class Schedule extends HttpServlet {
+public class ToSchedule extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,10 +28,8 @@ public class Schedule extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        DBContext<Session> sch = new ScheduleDBContext();
-        ArrayList<Session> list = sch.list();
-        request.setAttribute("scheduleList", list);
-        
+        int y= Calendar.getInstance().get(Calendar.YEAR);
+        request.setAttribute("year", String.valueOf(y));
         request.getRequestDispatcher("View Schedule.jsp").forward(request, response);
     } 
 
@@ -54,12 +44,7 @@ public class Schedule extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String kt = (String) request.getParameter("year");
-        int y;
-        if(kt == null) y=Calendar.YEAR;
-        else y= Integer.parseInt(kt);
-        request.setAttribute("year", String.valueOf(y));
-        request.getRequestDispatcher("View Schedule.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 

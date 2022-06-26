@@ -21,7 +21,7 @@ public class GroupDBContext extends DBContext<Group> {
         try {
             String sql = "SELECT g.GroupID, g.GroupName\n"
                     + "  FROM [Assignment].[dbo].[Course] as c, [Assignment].[dbo].[Group] as g\n"
-                    + "where g.CourseID=c.CourseID and c.CourseID=";
+                    + "where g.CourseID=c.CourseID and c.CourseID=?";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {

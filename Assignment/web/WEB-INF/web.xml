@@ -21,8 +21,8 @@
         <servlet-class>controller.Navigate</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ListStudent</servlet-name>
-        <servlet-class>controller.ListStudent</servlet-class>
+        <servlet-name>Report</servlet-name>
+        <servlet-class>controller.Report</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ListAttendance</servlet-name>
@@ -45,8 +45,8 @@
         <url-pattern>/Home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ListStudent</servlet-name>
-        <url-pattern>/ListStudent</url-pattern>
+        <servlet-name>Report</servlet-name>
+        <url-pattern>/Report</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

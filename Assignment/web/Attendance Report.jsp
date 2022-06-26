@@ -14,20 +14,20 @@
         <title>Take Attendance</title>
     </head>
     <link rel="Stylesheet" href="css/bootstrap.css" type="text/css">
-        <link rel="Stylesheet" href="css/bootstrap.min.css" type="text/css">
-        <link rel="Stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
-        <link href="css/mystyle.css" rel="stylesheet">
-        <script src="css/jquery_002.js" type="text/javascript"></script>
+    <link rel="Stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="Stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
+    <link href="css/mystyle.css" rel="stylesheet">
+    <script src="css/jquery_002.js" type="text/javascript"></script>
 
-        <script src="css/jquery_003.js" type="text/javascript"></script>
+    <script src="css/jquery_003.js" type="text/javascript"></script>
 
-        <script src="css/jquery.js" type="text/javascript"></script>
+    <script src="css/jquery.js" type="text/javascript"></script>
 
-        <script src="css/jquery-1.8.3.js" type="text/javascript"></script>
+    <script src="css/jquery-1.8.3.js" type="text/javascript"></script>
 
-        <script src="css/jquery-ui.js" type="text/javascript"></script>
+    <script src="css/jquery-ui.js" type="text/javascript"></script>
 
-        <script src="css/jquery.alerts.js" type="text/javascript"></script>
+    <script src="css/jquery.alerts.js" type="text/javascript"></script>
     <body>
         <nav class="navbar" role="navigation">
             <ul class="nav navbar-nav">
@@ -42,7 +42,25 @@
                 </div>    
             </div>
         </div>
-        <form action="TakeAttendance" method="post">
+        <form action="Report" method="post">
+            <table>
+                <tr><th>Course</th></tr>
+                        <c:forEach items="${requestScope.course}" var="c">
+                    <tr><td><button type="submit" name="chooseCourse" value="${c.courseId}"  class="btn-link">${c.courseName}</button></td></tr>
+                </c:forEach>s
+            </table>
+        </form>
+        <c:if test="${requestScope.group ne null}">
+            <form action="Report" method="post">
+                <table>
+                    <tr><th>Course</th></tr>
+                            <c:forEach items="${requestScope.group}" var="g">
+                        <tr><td><button type="submit" name="chooseGroup" value="${g.groupId}"  class="btn-link">${g.groupName}</button></td></tr>
+                    </c:forEach>s
+                </table>
+            </form>
+        </c:if>
+        <c:if test="${requestScope.studentlist ne null}">
             <h1>Take Attendance</h1>
             <table>
                 <thead>
@@ -52,31 +70,29 @@
                         <th>Sur Name</th>
                         <th>Mid Name</th>
                         <th>Given Name</th>
-                        <th>Message</th>
-                        <th>Attendance</th>
+                        <th>Attended</th>
+                        <th>Absented</th>
                     </tr>
                 </thead>
                 <tbody>
-                <input type="hidden" value="${requestScope.sid}" name="sid" />
-                <% int i=1;%>
-                <c:forEach items="${requestScope.liststudent}" var="stu">
+                    <%
+                        ArrayList<Student> s = (ArrayList<Student>) request.getAttribute("studenlist");
+                        ArrayList<Integer> attendance = (ArrayList<Integer>) request.getAttribute("attendance");
+                        ArrayList<Integer> attended = (ArrayList<Integer>) request.getAttribute("attended");
+                        for (int i = 0; i < s.size(); i++) {
+                    %>
                     <tr>
-                        <td><input type="hidden" value="${stu.studentId}" name="id<%=i%>" />${stu.studentId}</td>
-                        <td><input type="hidden" value="${stu.studentCode}" name="code<%=i%>" />${stu.studentCode}</td>
-                        <td><input type="hidden" value="${stu.surName}" name="sur<%=i%>" />${stu.surName}</td>
-                        <td><input type="hidden" value="${stu.midName}" name="mid<%=i%>" />${stu.midName}</td>
-                        <td><input type="hidden" value="${stu.givenName}" name="given<%=i%>" />${stu.givenName}</td>
-                        <td><input type="text" value="" name="mess<%=i%>"/></td>
-                        <td>
-                            <input type="radio" checked="checked" name="cbox<%=i%>" value="Absent"/>Absent  <input type="radio" name="cbox<%=i%>" value="Attended"/> Attended
-                        </td>
-                        <%i++;%>
+                        <td><%=s.get(i).getStudentId()%></td>
+                        <td><%=s.get(i).getStudentCode()%></td>
+                        <td><%=s.get(i).getSurName()%></td>
+                        <td><%=s.get(i).getMidName()%></td>
+                        <td><%=s.get(i).getGivenName()%></td>
+                        <td><%=attended.get(i)%></td>
+                        <td><%=attendance.get(i)-attended.get(i)%></td>
                     </tr>
-                </c:forEach>
-                <input type="hidden" value="<%=i%>" name="count" />
-                </tbody>
-            </table>
-            <input type="submit" name="Send"/>
-        </form>
-    </body>
+                    <%}%>
+            </tbody>
+        </table>
+    </c:if>
+</body>
 </html>

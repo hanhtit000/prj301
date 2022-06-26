@@ -6,19 +6,23 @@
 package controller;
 
 import dal.CourseDBContext;
-import dal.StudentDBContext;
+import dal.GroupDBContext;
+import dal.StudentReportDBContext;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import model.Course;
+import model.Group;
+import model.Student;
 
 /**
  *
  * @author ASUS
  */
-public class ListStudent extends HttpServlet {
+public class Report extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -29,9 +33,20 @@ public class ListStudent extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        StudentDBContext stu= new StudentDBContext();
-        CourseDBContext cou=new CourseDBContext();
+        int g = Integer.parseInt( (String) request.getParameter("chooseGroup"));
+        StudentReportDBContext sr= new StudentReportDBContext();
+        ArrayList<Student> stu = sr.get(g);
+        ArrayList<Integer> attendance = new ArrayList<>();
+        ArrayList<Integer> attended = new ArrayList<>();
+        for (Student student : stu) {
+            attendance.add(sr.CountAttend(student.getStudentId(), g));
+            attended.add(sr.CountAttended(student.getStudentId(), g));
         }
+        request.setAttribute("studenlist", stu);
+        request.setAttribute("attendance", attendance);
+        request.setAttribute("attended", attended);
+        request.getRequestDispatcher("Report.jsp").forward(request, response);
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -44,7 +59,10 @@ public class ListStudent extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        CourseDBContext cdb = new CourseDBContext();
+        ArrayList<Course> c = cdb.list();
+        request.setAttribute("course", c);
+        request.getRequestDispatcher("Report.jsp").forward(request, response);
     } 
 
     /** 
@@ -57,7 +75,13 @@ public class ListStudent extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        int c = Integer.parseInt( (String) request.getParameter("chooseCourse"));
+        GroupDBContext gdb= new GroupDBContext();
+        ArrayList<Group> g = gdb.list();
+        request.setAttribute("group", g);
+        String check = request.getParameter("chooseGroup");
+        if(check!=null) processRequest(request, response);
+        else request.getRequestDispatcher("Report.jsp").forward(request, response);
     }
 
     /** 

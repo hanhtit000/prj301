@@ -15,14 +15,14 @@ import model.Group;
 
 public class GroupDBContext extends DBContext<Group> {
 
-    @Override
-    public ArrayList<Group> list() {
+    public ArrayList<Group> list(int x) {
         ArrayList<Group> table = new ArrayList<>();
         try {
             String sql = "SELECT g.GroupID, g.GroupName\n"
                     + "  FROM [Assignment].[dbo].[Course] as c, [Assignment].[dbo].[Group] as g\n"
                     + "where g.CourseID=c.CourseID and c.CourseID=?";
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, x);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Group c = new Group();
@@ -59,6 +59,11 @@ public class GroupDBContext extends DBContext<Group> {
 
     @Override
     public void update(ArrayList<Group> entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ArrayList<Group> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

@@ -1,0 +1,25 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 23, 2022, 10:21:34 PM
+    Author     : ASUS
+*/
+.choose1 tbody tr td{
+    border: solid 1px;
+    padding: 10px 20px;
+    border-color: rgb(0, 0, 0);
+    text-align: center;
+}
+.choose2 {
+    display: inline-flex;
+    max-width: 50%;
+}
+.choose1 tbody tr th{
+    text-align: center;
+    padding: 10px 20px;
+    background-color: rgb(184, 184, 254);
+    border: solid 1px;
+    border-color: rgb(0, 0, 0);
+}

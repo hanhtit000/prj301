@@ -34,6 +34,7 @@
             <ul class="nav navbar-nav">
                 <li> <a href="Home">Home</a> </li>
                 <li> <a href="Schedule">View Schedule</a></li>
+                <li> <a href="Report">Attendance Report</a></li>
                 <li> <a style="color: black;">Update Attendance</a></li>
             </ul>
         </nav>

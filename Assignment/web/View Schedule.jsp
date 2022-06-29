@@ -56,7 +56,7 @@
         </div>
         <div class="choose">
             Year:
-            <form action="Schedule" method="get">
+            <form action="Schedule" method="post">
                 <select name="year" onchange="this.form.submit()">
                     <%
                         Calendar instance = Calendar.getInstance();
@@ -70,7 +70,7 @@
                 </select>
             </form><br>
             Week:
-            <form action="Schedule" method="get">
+            <form action="Schedule" method="post">
                 <input type="hidden" value="${requestScope.year}" name="choosedyear";/>
                 <select name="week" onchange="this.form.submit()">
                     <%
@@ -202,9 +202,9 @@
                             for(j=d-d1+1;j<d-d1+8;j++){
                                 LocalDate date1= null;
                                 if(d-d1+1<=0){
-                                if(j<=0 && y%4==0) date1= LocalDate.ofYearDay(y, j+366);
-                                    else if(j<=0 && y%4!=0) date1= LocalDate.ofYearDay(y, j+365);
-                                        else date1= LocalDate.ofYearDay(y+1, j);
+                                    if(j<=0 && y%4==0) date1= LocalDate.ofYearDay(y, j+366);
+                                        else if(j<=0 && y%4!=0) date1= LocalDate.ofYearDay(y, j+365);
+                                            else date1= LocalDate.ofYearDay(y+1, j);
                                     }
                                     else date1= LocalDate.ofYearDay(y, j);
                                 System.out.println(date1);
@@ -222,13 +222,13 @@
                             <%
                                 for(j=d-d1+1;j<d-d1+8;j++){
                                     int kt3=0;
-                                    LocalDate date = null;
+                                    Date date = null;
                                     if(d-d1+1<=0){
-                                if(j<=0 && y%4==0) date= LocalDate.ofYearDay(y, j+366);
-                                    else if(j<=0 && y%4!=0) date= LocalDate.ofYearDay(y, j+365);
-                                        else date= LocalDate.ofYearDay(y+1, j);
+                                    if(j<=0 && y%4==0) date= Date.valueOf(LocalDate.ofYearDay(y, j+366));
+                                        else if(j<=0 && y%4!=0) date= Date.valueOf(LocalDate.ofYearDay(y, j+365));
+                                            else date= Date.valueOf(LocalDate.ofYearDay(y+1, j));
                                     }
-                                    else date= LocalDate.ofYearDay(y, j);
+                                    else date= Date.valueOf(LocalDate.ofYearDay(y, j));
                                     for(Session c: s){
                                         if(c.getSlot()==i && c.getDate().equals(date)){
                                         kt3=1;
@@ -239,7 +239,7 @@
                                     UpdateDBContext att = new UpdateDBContext();
                                     ArrayList<Attendance> a = att.get(c.getSessionId());
                                         if(a.size()==0){
-                                        LocalDate date2 = LocalDate.now();
+                                        Date date2 = Date.valueOf(LocalDate.now());
                                         if(date2.compareTo(date)>=0){
                                 %>
                                 <h5 style="color: gray;">Not yet</h5>                                

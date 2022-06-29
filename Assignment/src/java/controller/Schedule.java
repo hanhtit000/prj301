@@ -34,47 +34,56 @@ public class Schedule extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String kt = (String) request.getParameter("year");
-        int y;
-        if (kt == null) {
+        String kt1 = (String) request.getParameter("choosedyear");
+        int y = 0;
+        if (kt == null && kt1 == null) {
             y = Calendar.getInstance().get(Calendar.YEAR);
-        } else {
+        }
+        if (kt != null && kt1 == null) {
             y = Integer.parseInt(kt);
+        }
+        if (kt == null && kt1 != null) {
+            y = Integer.parseInt(kt1);
         }
         request.setAttribute("year", String.valueOf(y));
         Calendar ist = Calendar.getInstance();
         int j = ist.get(Calendar.DAY_OF_YEAR);
         Date day = Date.valueOf(LocalDate.ofYearDay(y, j));
-        if (Calendar.getInstance().get(Calendar.YEAR) > y) {
-            while (Calendar.getInstance().get(Calendar.YEAR) > y) {
+        int currentyear = Calendar.getInstance().get(Calendar.YEAR);
+        if (currentyear > y) {
+            while (currentyear > y) {
                 ist.add(Calendar.DATE, -365);
+                currentyear--;
             }
         } else {
-            while (Calendar.getInstance().get(Calendar.YEAR) < y) {
+            while (currentyear < y) {
                 ist.add(Calendar.DATE, 365);
+                currentyear++;
             }
         }
         int doy = ist.get(Calendar.DAY_OF_YEAR);
         ist.add(Calendar.DATE, -doy);
         int dow = ist.get(Calendar.DAY_OF_WEEK);
-        ist.add(Calendar.DATE, -dow +7);
-        String kt1 = (String) request.getParameter("week");
+        ist.add(Calendar.DATE, -dow + 7);
+        String kt2 = (String) request.getParameter("week");
         int w;
-        if (kt1 == null) {
-            w = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
+        if (kt2 == null) {
+            w = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR) - 1;
         } else {
-            w = Integer.parseInt(kt1);
+            w = Integer.parseInt(kt2);
         }
-        ist.add(Calendar.DATE, w*7);
-        j = ist.get(Calendar.DAY_OF_YEAR);
-        Date end = Date.valueOf(LocalDate.ofYearDay(y, j));
-
+        ist.add(Calendar.DATE, w * 7);
         ist.add(Calendar.DATE, -6);
         j = ist.get(Calendar.DAY_OF_YEAR);
         Date start = Date.valueOf(LocalDate.ofYearDay(y, j));
+        ist.add(Calendar.DATE, +6);
+        int j1 = ist.get(Calendar.DAY_OF_YEAR);
+        Date end = null;
+        if(j1<j) end= Date.valueOf(LocalDate.ofYearDay(y+1, j1));
+        else end= Date.valueOf(LocalDate.ofYearDay(y, j1));
         ScheduleDBContext sch = new ScheduleDBContext();
         ArrayList<Session> list = sch.list(start, end);
         request.setAttribute("scheduleList", list);
-
         request.getRequestDispatcher("View Schedule.jsp").forward(request, response);
     }
 

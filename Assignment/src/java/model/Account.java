@@ -4,15 +4,21 @@
  */
 package model;
 
-/**
- *
- * @author Ngo Tung Son
- */
+import java.util.ArrayList;
+
 public class Account {
     private String username;
     private String password;
     private String displayName;
+    private ArrayList<Role> roles = new ArrayList<>();
 
+    public ArrayList<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(ArrayList<Role> roles) {
+        this.roles = roles;
+    }
     public String getUsername() {
         return username;
     }

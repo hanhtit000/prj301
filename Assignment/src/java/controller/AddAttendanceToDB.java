@@ -18,11 +18,12 @@ import java.sql.Date;
 import java.time.LocalDate;
 import model.Attendance;
 import model.Student;
+import account.BaseRequiredAuthenticationController;
 /**
  *
  * @author ASUS
  */
-public class AddAttendanceToDB extends HttpServlet {
+public class AddAttendanceToDB extends  BaseRequiredAuthenticationController{
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -111,5 +112,15 @@ public class AddAttendanceToDB extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    @Override
+    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

@@ -4,6 +4,7 @@
  */
 package controller;
 
+import account.BaseRequiredAuthenticationController;
 import dal.ScheduleDBContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -20,7 +21,8 @@ import model.Session;
  *
  * @author ASUS
  */
-public class Schedule extends HttpServlet {
+public class Schedule extends BaseRequiredAuthenticationController
+{
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -125,5 +127,15 @@ public class Schedule extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    @Override
+    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

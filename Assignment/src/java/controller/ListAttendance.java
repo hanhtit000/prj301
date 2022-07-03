@@ -4,6 +4,7 @@
  */
 package controller;
 
+import account.BaseRequiredAuthenticationController;
 import dal.StudentDBContext;
 import dal.DBContext;
 import java.io.IOException;
@@ -19,7 +20,7 @@ import model.Student;
  *
  * @author ASUS
  */
-public class ListAttendance extends HttpServlet {
+public class ListAttendance extends BaseRequiredAuthenticationController {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -95,5 +96,15 @@ public class ListAttendance extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    @Override
+    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

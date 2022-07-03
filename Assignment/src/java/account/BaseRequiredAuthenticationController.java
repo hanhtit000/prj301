@@ -5,31 +5,38 @@
 
 package account;
 
-import dal.AccountDBContext;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Account;
+import model.Feature;
+import model.Role;
 
 /**
  *
  * @author Ngo Tung Son
  */
-public class AuthenticationController extends HttpServlet {
+public abstract class BaseRequiredAuthenticationController extends HttpServlet {
    
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        
-    } 
+    private boolean isAuthenticated(HttpServletRequest request) {
+        Account account = (Account) request.getSession().getAttribute("account");
+        if(account ==null)
+            return false;
+        else
+        {
+            String usedFeatureURL = request.getServletPath();
+            for (Role role : account.getRoles()) {
+                for (Feature feature : role.getFeatures()) {
+                    if(feature.getUrl().equals(usedFeatureURL))
+                        return true;
+                }
+            }
+            return false;
+        }
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -42,9 +49,19 @@ public class AuthenticationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("login.jsp").forward(request, response);
+        if(isAuthenticated(request))
+        {
+            processGet(request, response);
+        }
+        else
+        {
+            response.getWriter().println("access denied!");
+        }
     } 
-
+    protected abstract void processGet(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException;
+    protected abstract void processPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException;
     /** 
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
@@ -55,18 +72,13 @@ public class AuthenticationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String user = request.getParameter("user");
-        String pass = request.getParameter("pass");
-        AccountDBContext db = new AccountDBContext();
-        Account account = db.getByUsernamePassword(user, pass);
-        if(account!=null)
+        if(isAuthenticated(request))
         {
-            request.getSession().setAttribute("account", account);
-            request.getRequestDispatcher("index.html").forward(request, response);
+            processPost(request, response);
         }
         else
         {
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+            response.getWriter().println("access denied!");
         }
     }
 

@@ -9,6 +9,10 @@
         <servlet-class>controller.AddAttendanceToDB</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>EditAttendance</servlet-name>
+        <servlet-class>controller.EditAttendance</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ChangeAttendanceFromDB</servlet-name>
         <servlet-class>controller.ChangeAttendanceFromDB</servlet-class>
     </servlet>
@@ -24,6 +28,10 @@
         <servlet-name>Report</servlet-name>
         <servlet-class>controller.Report</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AuthenticationController</servlet-name>
+        <servlet-class>account.AuthenticationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListAttendance</servlet-name>
         <url-pattern>/ListAttendance</url-pattern>
@@ -31,6 +39,10 @@
     <servlet-mapping>
         <servlet-name>TakeAttendance</servlet-name>
         <url-pattern>/TakeAttendance</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAttendance</servlet-name>
+        <url-pattern>/EditAttendance</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ChangeAttendanceFromDB</servlet-name>
@@ -47,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>Report</servlet-name>
         <url-pattern>/Report</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AuthenticationController</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

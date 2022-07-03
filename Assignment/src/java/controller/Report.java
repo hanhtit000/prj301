@@ -4,6 +4,7 @@
  */
 package controller;
 
+import account.BaseRequiredAuthenticationController;
 import dal.CourseDBContext;
 import dal.GroupDBContext;
 import dal.StudentReportDBContext;
@@ -21,7 +22,8 @@ import model.Student;
  *
  * @author ASUS
  */
-public class Report extends HttpServlet {
+public class Report extends BaseRequiredAuthenticationController
+{
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -110,5 +112,15 @@ public class Report extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    @Override
+    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

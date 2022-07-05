@@ -14,25 +14,26 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Take Attendance</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="Stylesheet" href="css/bootstrap.css" type="text/css">
+        <link rel="Stylesheet" href="css/bootstrap.min.css" type="text/css">
+        <link rel="Stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
+        <link href="css/mystyle.css" rel="stylesheet">
+        <link href="css/mystyle_1.css" rel="stylesheet">
+        <link href="css/mystyle2.css" rel="stylesheet">
+        <link href="css/mystyle2_1.css" rel="stylesheet">
+        <script src="css/jquery_002.js" type="text/javascript"></script>
+
+        <script src="css/jquery_003.js" type="text/javascript"></script>
+
+        <script src="css/jquery.js" type="text/javascript"></script>
+
+        <script src="css/jquery-1.8.3.js" type="text/javascript"></script>
+
+        <script src="css/jquery-ui.js" type="text/javascript"></script>
+
+        <script src="css/jquery.alerts.js" type="text/javascript"></script>
     </head>
-    <link rel="Stylesheet" href="css/bootstrap.css" type="text/css">
-    <link rel="Stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="Stylesheet" href="css/bootstrap-theme.min.css" type="text/css">
-    <link href="css/mystyle.css" rel="stylesheet">
-    <link href="css/mystyle_1.css" rel="stylesheet">
-    <link href="css/mystyle2.css" rel="stylesheet">
-    <link href="css/mystyle2_1.css" rel="stylesheet">
-    <script src="css/jquery_002.js" type="text/javascript"></script>
-
-    <script src="css/jquery_003.js" type="text/javascript"></script>
-
-    <script src="css/jquery.js" type="text/javascript"></script>
-
-    <script src="css/jquery-1.8.3.js" type="text/javascript"></script>
-
-    <script src="css/jquery-ui.js" type="text/javascript"></script>
-
-    <script src="css/jquery.alerts.js" type="text/javascript"></script>
     <body>
         <nav class="navbar" role="navigation">
             <ul class="nav navbar-nav">

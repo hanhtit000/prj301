@@ -58,7 +58,7 @@ public class AddAttendanceToDB extends  BaseRequiredAuthenticationController{
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     } 
@@ -71,7 +71,7 @@ public class AddAttendanceToDB extends  BaseRequiredAuthenticationController{
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         int sessionid = Integer.parseInt(request.getParameter("sid"));
         ArrayList<Attendance> att = new ArrayList<>();
@@ -112,15 +112,5 @@ public class AddAttendanceToDB extends  BaseRequiredAuthenticationController{
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    protected void processPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
 }

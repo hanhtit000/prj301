@@ -62,7 +62,8 @@ public class AuthenticationController extends HttpServlet {
         if(account!=null)
         {
             request.getSession().setAttribute("account", account);
-            request.getRequestDispatcher("index.html").forward(request, response);
+            
+            request.getRequestDispatcher("/Home").forward(request, response);
         }
         else
         {

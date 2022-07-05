@@ -32,6 +32,10 @@
         <servlet-name>AuthenticationController</servlet-name>
         <servlet-class>account.AuthenticationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>controller.Logout</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ListAttendance</servlet-name>
         <url-pattern>/ListAttendance</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>AuthenticationController</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

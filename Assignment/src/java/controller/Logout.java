@@ -5,24 +5,19 @@
 
 package controller;
 
-import account.BaseRequiredAuthenticationController;
-import dal.DBContext;
-import dal.UpdateDBContext;
+import jakarta.servlet.ServletContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import model.Attendance;
 
 /**
  *
  * @author ASUS
  */
-public class EditAttendance extends BaseRequiredAuthenticationController {
+public class Logout extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,19 +28,8 @@ public class EditAttendance extends BaseRequiredAuthenticationController {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditAttendance</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditAttendance at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        request.getSession().removeAttribute("account");
+        request.getRequestDispatcher("/Home").forward(request, response);
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,7 +41,7 @@ public class EditAttendance extends BaseRequiredAuthenticationController {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     } 
@@ -70,18 +54,9 @@ public class EditAttendance extends BaseRequiredAuthenticationController {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void processPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        int ta = Integer.parseInt((String) request.getParameter("editattend"));
-        int group = Integer.parseInt((String) request.getParameter("group"));
-        request.setAttribute("groupid", group);
-        String groupname = (String) request.getParameter("groupname");
-        request.setAttribute("groupname", groupname);
-        DBContext<Attendance> att = new UpdateDBContext();
-        ArrayList<Attendance> list = att.get(ta);
-        request.setAttribute("listeditstudent", list);
-        request.setAttribute("sid", ta);
-        request.getRequestDispatcher("Update Attendance.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /** 

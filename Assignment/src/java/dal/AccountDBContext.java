@@ -23,10 +23,10 @@ public class AccountDBContext extends DBContext<Account> {
     public Account getByUsernamePassword(String user, String pass) {
         try {
             String sql = "SELECT a.username,a.displayname,ISNULL(r.rid,-1) as rid ,r.rname, ISNULL(f.fid,-1) AS fid,f.fname,f.url\n"
-                    + "FROM Account a LEFT JOIN Role_Account ra ON a.username = ra.username\n"
-                    + "						LEFT JOIN [Role] r ON r.rid = ra.rid\n"
-                    + "						LEFT JOIN [Role_Feature] rf ON rf.rid = r.rid\n"
-                    + "						LEFT JOIN Feature f ON f.fid = rf.fid\n"
+                    + "FROM [Account] a LEFT JOIN [Role Account] ra ON a.username = ra.username\n"
+                    + "					LEFT JOIN [Role] r ON r.rid = ra.rid\n"
+                    + "					LEFT JOIN [Role Feature] rf ON rf.rid = r.rid\n"
+                    + "					LEFT JOIN [Feature] f ON f.fid = rf.fid\n"
                     + "WHERE a.username = ? AND a.password = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, user);
@@ -35,10 +35,10 @@ public class AccountDBContext extends DBContext<Account> {
             Account account = null;
             Role currentRole = new Role();
             currentRole.setRid(-1);
-            
+
             Feature currentFeature = new Feature();
             currentFeature.setFid(-1);
-            
+
             while (rs.next()) {
                 if (account == null) {
                     account = new Account();
@@ -46,22 +46,18 @@ public class AccountDBContext extends DBContext<Account> {
                     account.setUsername(user);
                 }
                 int rid = rs.getInt("rid");
-                if(rid!=-1)
-                {
-                    if(rid != currentRole.getRid())
-                    {
+                if (rid != -1) {
+                    if (rid != currentRole.getRid()) {
                         currentRole = new Role();
                         currentRole.setRid(rid);
                         currentRole.setRname(rs.getString("rname"));
                         account.getRoles().add(currentRole);
                     }
                 }
-                
+
                 int fid = rs.getInt("fid");
-                if(fid != -1)
-                {
-                    if(fid != currentFeature.getFid())
-                    {
+                if (fid != -1) {
+                    if (fid != currentFeature.getFid()) {
                         currentFeature = new Feature();
                         currentFeature.setFid(fid);
                         currentFeature.setFname(rs.getString("fname"));

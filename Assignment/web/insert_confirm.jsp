@@ -4,6 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Attendance Added</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="Stylesheet" href="css/bootstrap.css" type="text/css">
         <link rel="Stylesheet" href="css/bootstrap.min.css" type="text/css">
         <link rel="Stylesheet" href="css/bootstrap-theme.min.css" type="text/css">

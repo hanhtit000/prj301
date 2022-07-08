@@ -15,6 +15,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import model.Account;
 import model.Session;
 
 /**
@@ -84,7 +85,13 @@ public class Schedule extends BaseRequiredAuthenticationController
         if(j1<j) end= Date.valueOf(LocalDate.ofYearDay(y+1, j1));
         else end= Date.valueOf(LocalDate.ofYearDay(y, j1));
         ScheduleDBContext sch = new ScheduleDBContext();
-        ArrayList<Session> list = sch.list(start, end);
+        ArrayList<Session> list;
+        Account acc=(Account) request.getSession().getAttribute("account");
+        if(acc.getInstructorID()>0)
+        {
+            list = sch.listWithInstructorID(start, end, acc.getInstructorID());
+        }
+        else list = sch.list(start, end);
         request.setAttribute("scheduleList", list);
         request.getRequestDispatcher("View Schedule.jsp").forward(request, response);
     }

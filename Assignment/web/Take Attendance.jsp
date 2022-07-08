@@ -43,6 +43,10 @@
             <div class="row">
                 <div id="ctl00_divUser" style="float: right; margin-right: 16px;">
                     <span id="ctl00_lblCampusName" class="label label-success"> CAMPUS: FPTU-Hòa Lạc</span>
+                    <span id="ctl00_lblCampusName" class="label label-success">${sessionScope.account.username}</span>
+                    <form action="Logout" method="post" style="display: flex; max-width: 200px; right: 0; ">
+                        <input type="submit" value="Logout">
+                    </form>
                 </div>    
             </div>
         </div>

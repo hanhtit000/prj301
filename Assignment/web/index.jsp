@@ -33,7 +33,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <span id="ctl00_lblCampusName" class="label label-success"> CAMPUS: FPTU-Hòa Lạc</span>
                     <c:if test="${sessionScope.account ne null}">
                         <span id="ctl00_lblCampusName" class="label label-success">${sessionScope.account.username}</span>
-                        |
                         <form action="Logout" method="post" style="display: flex; max-width: 200px; right: 0; ">
                             <input type="submit" value="Logout">
                         </form>

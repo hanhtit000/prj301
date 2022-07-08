@@ -10,6 +10,15 @@ public class Account {
     private String username;
     private String password;
     private String displayName;
+    private int InstructorID;
+
+    public int getInstructorID() {
+        return InstructorID;
+    }
+
+    public void setInstructorID(int InstructorID) {
+        this.InstructorID = InstructorID;
+    }
     private ArrayList<Role> roles = new ArrayList<>();
 
     public ArrayList<Role> getRoles() {

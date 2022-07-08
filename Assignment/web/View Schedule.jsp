@@ -5,6 +5,7 @@
 <%@page import="java.time.LocalDate" %>
 <%@page import="java.sql.Date" %>
 <%@page import="model.Session" %>
+<%@page import="model.Account" %>
 <%@page import="model.Attendance" %>
 <%@page import="dal.UpdateDBContext" %>
 <!doctype html>
@@ -46,6 +47,10 @@
             <div class="row">
                 <div id="ctl00_divUser" style="float: right; margin-right: 16px;">
                     <span id="ctl00_lblCampusName" class="label label-success"> CAMPUS: FPTU-Hòa Lạc</span>
+                    <span id="ctl00_lblCampusName" class="label label-success">${sessionScope.account.username}</span>
+                    <form action="Logout" method="post" style="display: flex; max-width: 200px; right: 0; ">
+                        <input type="submit" value="Logout">
+                    </form>
                 </div>    
             </div>
         </div>
@@ -235,12 +240,15 @@
                             %>
                             <td><%=c.getGroupId().getCourseId().getCourseName()%>
                                 <br> at <%=c.getRoomName()%>
-                                <%        
+                                <%  
+                                    Account acc= (Account) request.getSession().getAttribute("account");
                                     UpdateDBContext att = new UpdateDBContext();
                                     ArrayList<Attendance> a = att.get(c.getSessionId());
+                                    if(acc.getInstructorID()>=0){
                                         if(a.size()==0){
                                         Date date2 = Date.valueOf(LocalDate.now());
                                         if(date2.compareTo(date)>=0){
+                                            
                                 %>
                                 <h5 style="color: gray;">Not yet</h5>                                
                                 <form action="ListAttendance" method="post">
@@ -257,6 +265,7 @@
                                     <input type="hidden" name="group" value="<%=c.getGroupId().getGroupId()%>"/>
                                     <input type="hidden" name="groupname" value="<%=c.getGroupId().getGroupName()%>"/>
                                 </form>
+                                <%}%>
                                 <%}%>
                             </td>
                             <%}}

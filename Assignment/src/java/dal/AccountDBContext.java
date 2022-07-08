@@ -22,7 +22,7 @@ public class AccountDBContext extends DBContext<Account> {
 
     public Account getByUsernamePassword(String user, String pass) {
         try {
-            String sql = "SELECT a.username,a.displayname,ISNULL(r.rid,-1) as rid ,r.rname, ISNULL(f.fid,-1) AS fid,f.fname,f.url\n"
+            String sql = "SELECT a.username,a.displayname,a.InstructorID,ISNULL(r.rid,-1) as rid ,r.rname, ISNULL(f.fid,-1) AS fid,f.fname,f.url\n"
                     + "FROM [Account] a LEFT JOIN [Role Account] ra ON a.username = ra.username\n"
                     + "					LEFT JOIN [Role] r ON r.rid = ra.rid\n"
                     + "					LEFT JOIN [Role Feature] rf ON rf.rid = r.rid\n"
@@ -44,6 +44,7 @@ public class AccountDBContext extends DBContext<Account> {
                     account = new Account();
                     account.setDisplayName(rs.getString("displayname"));
                     account.setUsername(user);
+                    account.setInstructorID(rs.getInt("InstructorID"));
                 }
                 int rid = rs.getInt("rid");
                 if (rid != -1) {

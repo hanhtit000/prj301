@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import model.Account;
 import model.Course;
 import model.Group;
 import model.Student;
@@ -52,14 +53,19 @@ public class Report extends BaseRequiredAuthenticationController
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CourseDBContext cdb = new CourseDBContext();
-        ArrayList<Course> course = cdb.list();
+        Account acc= (Account) request.getSession().getAttribute("account");
+        ArrayList<Course> course;
+        if(acc.getInstructorID()>0) course = cdb.list(acc.getInstructorID());
+        else course = cdb.list();
         request.setAttribute("course", course);
         int c = 1;
         if (request.getParameter("chooseCourse") != null) {
             c = Integer.parseInt((String) request.getParameter("chooseCourse"));
         }
         GroupDBContext gdb = new GroupDBContext();
-        ArrayList<Group> g = gdb.list(c);
+        ArrayList<Group> g;
+        if(acc.getInstructorID()>0) g = gdb.list(c,acc.getInstructorID());
+        else g = gdb.list(c);
         request.setAttribute("group", g);
         request.setAttribute("choosedCourse", c);
         request.getRequestDispatcher("Attendance Report.jsp").forward(request, response);
@@ -76,15 +82,20 @@ public class Report extends BaseRequiredAuthenticationController
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Account acc= (Account) request.getSession().getAttribute("account");
         CourseDBContext cdb = new CourseDBContext();
-        ArrayList<Course> course = cdb.list();
+        ArrayList<Course> course;
+        if(acc.getInstructorID()>0) course = cdb.list(acc.getInstructorID());
+        else course = cdb.list();
         request.setAttribute("course", course);
         int c = 1;
         if (request.getParameter("choosedCourse") != null) {
             c = Integer.parseInt((String) request.getParameter("choosedCourse"));
         }
         GroupDBContext gdb = new GroupDBContext();
-        ArrayList<Group> group = gdb.list(c);
+        ArrayList<Group> group;
+        if(acc.getInstructorID()>0) group = gdb.list(c,acc.getInstructorID());
+        else group = gdb.list(c);
         request.setAttribute("group", group);
         int g = Integer.parseInt((String) request.getParameter("chooseGroup"));
         StudentReportDBContext sr = new StudentReportDBContext();
